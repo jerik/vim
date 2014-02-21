@@ -1,0 +1,133 @@
+"	VIM Konfiguration Datei
+"	J. Erik Heinz"
+"	Villeicht interessant:
+"	http://cscope.sourceforge.net/cscope_vim_tutorial.html
+
+"	Kein piepen
+set	noerrorbells
+  
+"	Globale einstellungen für Tabstop und shiftwidth
+set	tabstop=4
+set sw=4
+
+"	Visuelles Klingeln anstat normales piepen
+set visualbell
+
+"	Automatisches einrücken 
+set autoindent
+ 
+"	autowrite: Automatically save modifications to files
+"	when you use critical (rxternal) commands.
+set autowrite
+
+"	backspace:  '2' allows backspacing" over
+"	indentation, end-of-line, and start-of-line.
+"	see also "help bs".
+set backspace=2
+
+"	esckeys:    allow usage of cursor keys within insert mode
+"	You will find this useful when working, eg, on SunOS.
+set esckeys
+
+"	hidden:  Allow "hidden" buffers.  A must-have!
+set hidden
+
+"	hlsearch :  highlight search - show the current search pattern
+"	This is a nice feature sometimes - but it sure can get in the
+"	way sometimes when you edit.
+set nohlsearch
+
+"	ignorecase:  ignore the case in search patterns?  NO!
+set noignorecase
+
+"	laststatus:  show status line?  Yes, always!
+"	laststatus:  Even for only one buffer.
+set laststatus=2
+
+"	magic:  Use 'magic' patterns  (extended regular expressions)
+"	in search patterns?  Certainly!  (I just *love* "\s\+"!)
+set magic
+
+"	modeline:    ...
+"	Allow the last line to be a modeline - useful when
+"	the last line in sig gives the preferred textwidth for replies.
+set modeline
+set modelines=1
+
+"	ruler:       show cursor position?  Yep!
+set ruler
+
+"	number:      Zeilennummer: nein
+set nonumber
+
+"	showcmd:     Show current uncompleted command?  Absolutely!
+set showcmd
+
+"	showmatch:   Show the matching bracket for the last ')'?
+set showmatch
+
+"	showmode:    Show the current mode?  YEEEEEEEEESSSSSSSSSSS!
+set showmode
+
+"	splitbelow:  Create new window below current one.
+set splitbelow
+"	
+"	statusline:  customize contents of the windows' status line.
+"	I prefer it this way:
+"	Show the current buffer number and filename with info on
+"	modification, read-only, and whether it is a help buffer
+"	(show only when applied).
+"	set   statusline=[%n]\ %f\ %(\ %M%R%H)%)
+"	set   statusline=[%n]\ %f\ %(\ %M%R%H)%)\=Pos=<%l\,%c%V>\ %P\=ASCII=%b\ HEX=%B)%=(c)\ Michael\ Prokop
+"	Meine favorisierte statusline:
+set statusline=%<[%n]\%f\%y\%r\%1*%m%*%w%=%(Spalte:\%c%V%)%4(%)%-10(Zeile:\%l%)\%4(%)%p%%\%P\ \ \ \ ASCII=%b\ HEX=%B\ \ \ \ \ [jerik]
+
+"	ttyscroll:      turn off scrolling -> faster!
+set ttyscroll=0
+  
+"	whichwrap:
+"	Allow jump commands for left/right motion to wrap to previous/next
+"	line when cursor is on first/last character in the line:
+set whichwrap=<,>,h,l,[,]
+
+"	wrapmargin:
+"	When do you want the line to break? A value of 1 means that 1
+"	"cursor" before the end of the visible screen.
+"	if wrapmargin=n, then the wrapping occurs if the distance to the
+"	right screen-border is "n" spaces
+set wrapmargin=1
+
+"	Swapfiles nicht ins gleich verzeichnis schreiben, sondern in ein spezielles
+" set dir=/usr/swps
+" For windows OS, missing switch
+set dir=C:\Windows\Temp\swps
+
+
+"Viki settings:"
+" this is in iso-latin-1
+let g:vikiLowerCharacters = "a-zäöüßáàéèíìóòçñ"
+let g:vikiUpperCharacters = "A-ZÄÖÜ"
+
+"Add the Wiki suffix to an vikiword. means OtherIdea links to OtherIdea.txt"
+let g:vikiUseParentSuffix = 1
+
+" better colorschema"
+"color jerik
+
+" Fullscreen when opening vim # for winwos
+au GUIEnter * simalt ~x
+
+"Rails configuraiton - 2006-07-13 "
+"see: :h rails"
+autocmd User Rails* Lcd
+let g:rails_level=4
+
+"	Switch syntax highlighting on, when the terminal has colors
+"	Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+ 	syntax on
+	set hlsearch
+endif
+
+filetype plugin on
+

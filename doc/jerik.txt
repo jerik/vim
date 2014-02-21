@@ -1,0 +1,190 @@
+*jk-scripting-help* *jerik*
+
+Tipps fürs vim scripting. Zur bessren konfiguration.
+
+Abbreviations												*jk-abbr* 
+-----------------------------------------------------------------------------
+Dynamische Ausgaben mittels abbreviations erzeugen. Das kann auf zwei wegen 
+erfolgen: 
+
+	iab Ydate1 <C-R>=strftime("%d.%m.%Y")<CR>				|<C-R>|
+	iab Ydate2 <ESC>:.!date +\%Y<CR>
+	iab <expr> heu strftime("=%Y%m%d")
+	iab <expr> tom strftime("=%Y%m%d", localtime(  ) + ( 24*3600 ))
+	iab <expr> nwe strftime("=%Y%m%d", localtime(  ) + ( 7*24*3600 ))
+	inoremap <expr> today strftime( "=%Y%m%d", localtime() )
+	inoremap <expr> tomorrow strftime( "=%Y%m%d", localtime() + (24 * 3600) )
+	inoremap <expr> nextweek strftime( "=%Y%m%d", localtime() + (7 * 24 * 3600) )
+
+Man kann auch Mappings auf eine abbreviation legen:
+
+	imap <F11> <ESC>:.!date<CR>
+	iab Ydate3 <F11>
+
+
+Lokale Hilfe												*jk-local-help*
+-----------------------------------------------------------------------------
+Um die lokale hilfe in vim erreichbar zu machen, muss man nachfolgendes 
+Kommando ausführen. Dabei ist ~/.vim/doc das verzeichnis in dem ich den
+Hilfetext erstellt habe. (Sollte defaultmässig immer so sein)
+
+	:helptags ~/.vim/doc								|add-local-help|
+
+
+Funktion ausführbar machen									*jk-add-function*
+-----------------------------------------------------------------------------
+Um eine Funktion ausführbar zu machen über den Commandline-Modus, muss man
+die Funktion mit |command| registrieren.
+
+	function! Abc()
+		.!echo "hallo welt"
+	endfunction
+
+	command Abc call Abc
+
+Besitzt die Funktion paramater, sieht das wiefolgt aus.
+
+	function! Xyz(sVar)
+		let i = a:sVar
+	endfunction
+	
+	command  -nargs=1 Xyz call Xyz("<args>")
+
+Wobei -nargs=1 aufzeigt wieviel parameter angegeben werden müssen. Sollen
+parameter optional angegeben werden dann lautet mit '*', d.h. -nargs=*
+
+
+Concat - Variablen und Strings verbinden  					*jk-concat*
+-----------------------------------------------------------------------------
+Um eine variable mit einem string zu verbinden muss man den string in 
+Anführungszeichen setzen, und string mit varibale über den concatenator . 
+verbinden
+
+	let FILE=foo
+	exec "source " . FILE
+
+
+Execute the current File - 									*jk-execute*
+-----------------------------------------------------------------------------
+Um die Datei auszuführen die man gerade bearbeitet kann man nachfolgende
+Kommandos in der .vimrc festlegen:
+
+	autocmd FileType python map <F7> :!python %<CR>
+	autocmd FileType sh map <F7> :!bash -c ./%<CR>
+
+Damit wir beim drücken von <F7> der entsprechende interpreter mit der 
+Datei ausgeführt. ODER:
+
+    nnoremap <F12> :!%:p<CR>
+
+Siehe dazu auch ":help cmdline-special".
+	
+
+Vertikales Selektieren (Auswählen)					*jk-vert-select*
+-----------------------------------------------------------------------------
+Um in einer Textdatei Vertikal zu selektieren benutzt man den shortcut
+
+	STRG+V 
+
+im normalen Modus
+
+
+Keycodes - keycodes der Tasten									*jk-keycodes*
+-----------------------------------------------------------------------------
+Siehe |keycodes|
+
+
+Verbose - anzeigen von Einstellungen in VIM  					*jk-verbose*
+-----------------------------------------------------------------------------
+
+	:verbose nmap ,t
+
+Zeigt an in welcher Datei das Kommando definiert ist, bspw. 
+
+	n  ,t            <Esc>:Todos<CR>:w<CR>
+			Last set from ~/.vim/plugin/mygft.vim
+
+Andere Möglichkeiten wären: 
+	:verbose filetype
+
+
+Drucken - druckeinstellungen in Vim			  					*jk-print*
+-----------------------------------------------------------------------------
+Drucken ohne dateiname und seitenzahl
+
+    :set popt=header:0 
+    :help print-options, :help pheader 
+
+Mehrere Option bei set werden mit Komma getrennt
+
+    :set printoptions=paper:A4,portrait:n,wrap:y,syntax:y,duplex:long 
+    ohne header, in landscape :set popt=header:0,portrait:n 
+
+
+Suchen und löschen 						  					*jk-delete*
+-----------------------------------------------------------------------------
+Alle Zeilen löschen die NICHT das pattern (Muster) enthalten 
+
+	:!g/pattern/d 
+	:v/pattern/d
+
+Alle Zeilen löschen die das pattern (Muster) enthalten 
+
+	:g/pattern/d
+
+
+Suchen und kopieren (yank) 			  					*jk-yank* *jk-copy*
+-----------------------------------------------------------------------------
+Alle Zeilen in register "a kopieren, die das wort pattern enthalten 
+
+	:global/pattern/yank A		# wichtig A nicht a
+	:g/pattern/y A
+
+:global findet alle vorkommen von pattern, danach kann man ex-operationen wie
+yank ( y ) oder delete ( d ) ausführen
+
+Den kopierten Inhalt wieder einfügen: 
+	
+	"aP				Register a pasten
+
+Mit :reg kann man sich die Inhalte der Register anschauen. :reg a zeigt nur
+register a an 
+
+
+Markieren von Text 						  					*jk-select*
+-----------------------------------------------------------------------------
+Alles mit und innerhalb von Klammern markieren. Dazu auf die start oder
+end-klammmer navigieren und folgenden eingeben:
+
+	v%			# bei ([{  
+	y%			# kopiert sofort alles bei ([{  
+	d%			# löscht alles bei ([{  
+	c%			# löscht alles bei ([{ und geht in den insert mode
+
+Alles innerhalb von Klammern markieren. Dazu muss man innerhalb der Klammer
+sein: 	für kopieren y, löschen d, löschen und insert mode c, anstelle von v
+
+	vib 		# bei (
+	viB			# bei [
+	vit			# bei <tag>
+
+Alles innnherhalb von Anführungszeichen markieren. Dazu muss man innerhalb der
+Anführungzeichen sein: 	für kopieren y ,löschen d, löschen und insert mode c 
+anstelle von v
+
+	vi"			# bei " ( doppeltes Gänsefüsschen )
+	vi'			# bei ' ( einfaches Gänsefüsschen )
+
+
+Normal commands in insert mode						 *jk-insert*
+-----------------------------------------------------------------------------
+Um ein commando im normal mode während des insert modes auszuführen, kann man
+mit <C-o> (Strg + o) kurz in den Modus reinwechseln. Nach ausführen des
+Kommandos ist man automatisch wieder im insert mode. 
+
+Bspw. wenn man an der ersten Zeile was einfügen will
+
+	<C-o>gg
+
+
+  vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:

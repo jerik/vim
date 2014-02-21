@@ -1,0 +1,65 @@
+
+*jk-tools-tips-usefull* *usefull*
+
+Tools und Tipps rund um IT
+
+nmap												*jk-nmap* 
+-----------------------------------------------------------------------------
+Herausfinden welche IP's es in einem intranet gibt
+
+	nmap -sP 192.168.1.*
+
+Herausfinden welche OS eine IP hat ( erfordert Root-Rechte )
+
+	nmap -O 192.168.1.2
+
+
+mount												*jk-mount*
+-----------------------------------------------------------------------------
+Samba file System mounten unter linux
+
+	mount -t cifs //192.168.1.2/vilit mount -o user=jerik
+
+
+rsnc												*jk-rsync*
+-----------------------------------------------------------------------------
+Trailing Slash 
+     #1: rsync -a --delete /some/path/a/ /some/otherpath/
+	 #2: rsync -a --delete /some/path/a /some/otherpath/
+		 
+		 
+		 
+Answer: the first will make /some/otherpath mirror the contents of
+/some/path/a, while the latter will create a directory in
+/some/otherpath/a whose contents will mirror /some/path/a.
+		 
+Be warned! If you're not careful and you use #1 when you intend to
+use #2, you can lose files in /some/otherpath.''
+http://stay-calm.blogspot.de/2008/10/rsync-be-mindful-of-trailing-slash.html
+
+ruby csv 												*jk-ruby-csv*
+-----------------------------------------------------------------------------
+require 'fileutils'
+require 'tempfile'
+
+# file must be utf-8 encoded
+# http://stackoverflow.com/questions/2311750/change-file-encoding-to-utf-8-via-vim-in-a-script
+t_file = Tempfile.new('tempfile.txt')
+File.open("source.csv", 'r') do |f|
+        f.each_line do |line| 
+          t_file.puts line.split(";")[0].to_s 
+        end
+end
+t_file.close
+FileUtils.mv(t_file.path, "filename.txt")
+
+ruby snippets												*jk-ruby*
+-----------------------------------------------------------------------------
+object.inspect 					gibt debug für object aus
+string.strip					entfernt whitespace vorne u. hinten, auch \r\n
+  
+Platzhalter												*jk-platzhalterp*
+-----------------------------------------------------------------------------
+Lorem ipsum 
+
+  vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:

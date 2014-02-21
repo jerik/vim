@@ -1,0 +1,10 @@
+#!/bin/ksh
+
+typeset -i cnt
+
+cnt=$(wc -c <$1)
+((cnt=(cnt/1024)+2))
+yes "glibberish" | CRYPTKEY=$(date +%Y%m%d%H%M%S; echo xxx) rc5a |
+  dd ibs=1k count=$cnt of=$1 2>/dev/null
+sync
+rm -f $1
