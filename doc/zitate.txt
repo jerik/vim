@@ -1,0 +1,10 @@
+*zitate* 
+
+Zitate
+
+Zitate												*zitate* 
+-----------------------------------------------------------------------------
+Was eindringlich gelehrt wird, wird nicht gekonnt und eigentlich nicht
+gewollt. Gunter dueck
+
+  vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:
