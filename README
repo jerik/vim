@@ -1,5 +1,9 @@
 = VIM Konfiguration =
-Dieses Verzeichnis enthält die Konfigurationen zu VIM.
+Dieses Verzeichnis enthï¿½lt die Konfigurationen zu VIM.
 
 == Initiale Konfiguration ==
-Für die Initiale Konfiguration muss noch die vimrc noch nach ~/.vimrc gelinkt (ln -s) werden
+Fï¿½r die Initiale Konfiguration muss noch die vimrc noch nach ~/.vimrc gelinkt (ln -s) werden
+
+== TODO 
+    " Highlight in lieghtblue einfÃ¼gen
+    hi Search guibg=LightBlue
