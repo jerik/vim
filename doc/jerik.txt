@@ -138,6 +138,9 @@ Alle leere Zeilen löschen
 Alle linebreaks loeschen, d.h. eine einzige Zeile erstellen
 	:%j
 
+Alle tags löschen, contnet bleibt erhalten
+	:%s/<\_.\{-1,\}>//g
+	
 Suchen und kopieren (yank) 			  					*jk-yank* *jk-copy*
 -----------------------------------------------------------------------------
 Alle Zeilen in register "a kopieren, die das wort pattern enthalten 
