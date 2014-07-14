@@ -15,6 +15,10 @@ iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 ""iab tom <C-o>:r !date -v+1d "+=\%Y\%m\%d"<CR>
 ""iab too <ESC>:r !ruby -e "puts (Time.now + 24*60*60).strftime('\%Y\%m\%d')"<CR>   
 
+" Strip tags from buffer "
+" http://aftnn.org/post/47880443079/strip-tags-in-a-vim-buffer
+:command! STag :%s/<\_.\{-1,\}>//g  
+
 
 " um mit project_notes besser zu arbeiten
 ""nmap ,d <ESC>:s/@todo-next/@done/<CR>:w<CR>
