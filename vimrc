@@ -127,8 +127,8 @@ endif
 
 "Rails configuraiton - 2006-07-13 "
 "see: :h rails"
-autocmd User Rails* Lcd
-let g:rails_level=4
+"autocmd User Rails* Lcd
+"let g:rails_level=4
 
 "	Switch syntax highlighting on, when the terminal has colors
 "	Also switch on highlighting the last used search pattern.
