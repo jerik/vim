@@ -24,7 +24,8 @@ iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 ""nmap ,d <ESC>:s/@todo-next/@done/<CR>:w<CR>
 " replaces no every variation of @todo*"
 "nmap ,d <ESC>:s/@todo.\{-} /@done /<CR>:w<CR>
-nmap ,d <ESC>:Tododone<CR>:w<CR>
+"nmap ,d <ESC>:Tododone<CR>:w<CR>
+nmap ,d <ESC>:call Tdone()<CR>
 nmap ,o <ESC>:Todotodo<CR>:w<CR>
 "nmap ,w <ESC>:s/@todo.\{-} /@todo-wait /<CR>:w<CR>
 nmap ,w <ESC>:Todocwait<CR>:w<CR>
@@ -263,3 +264,13 @@ command! -nargs=1 Done :call Search( "@done", "<args>" )
 command! -nargs=1 Find :call Search( " ", "<args>" )
 
 endif
+
+
+"relpace @todo wit @done"
+function! Tdone(  )
+	let line=getline('.')
+	let newline = substitute(line, "@todo", "@done", "")
+	call setline('.', newline)
+	:w
+endfunction
+"command! Tdone call Tdone()
