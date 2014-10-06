@@ -9,11 +9,24 @@ iab ydate <C-R>=strftime("%d.%m.%Y")<CR>
 iab isodate <C-R>=strftime("%Y-%m-%d")<CR>
 
 "	Verbessertes arbeiten im Vim
-nmap ,v <ESC>:e $HOME/.vimrc<CR>
 nmap ,h <ESC>:e $HOME/.vim/doc/jerik.txt<CR>
+" What does this function do 
 nmap ,< <C-W>w
 ""nmap ö f"a
 nmap <M-v> f"a
+
+" Open vimrc with ,v shortcut
+""nmap ,v <ESC>:e $HOME/.vimrc<CR>
+nmap ,v <ESC>:Vimrc<CR>
+function! Vimrc()
+	let s:vimrc = ".vimrc"
+	if has( "win32" )
+		let s:vimrc = "_vimrc"
+	endif 
+	echo s:vimrc
+    exec ":e $HOME/" . s:vimrc
+endfunction
+command! Vimrc call Vimrc()
 
 imap ;; <ESC>:normal A;<CR>:w<CR>
 nmap ;; <ESC>:normal A;<CR>:w<CR>
