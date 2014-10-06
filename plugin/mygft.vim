@@ -268,9 +268,14 @@ endif
 
 "relpace @todo wit @done"
 function! Tdone(  )
-	let line=getline('.')
-	let newline = substitute(line, "@todo", "@done", "")
-	call setline('.', newline)
+	""let line=getline('.')
+	""let newline = substitute(line, "@todo", "@done", "")
+	"let newline = substitute(line, "@todo.*? ", "@done", "")
+	""call setline('.', newline)
+	"":w
+" http://stackoverflow.com/a/26214054/1933185
+
+	:s/@todo\%(-\w\+\)* /@done / 
 	:w
 endfunction
 "command! Tdone call Tdone()
