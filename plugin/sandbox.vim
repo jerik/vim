@@ -10,4 +10,21 @@ function! Foo(  )
 endfunction
 command! Foo call Foo()
 
-""@done is das was
+""@todo-next iasdfadf asdf
+
+function! TTest( ... )
+	if a:0 > 0
+		if a:1 == ""
+			echom "leer"
+		else
+			let type = a:1
+			echom type
+		endif
+	else
+		echom "kein parameter übergeben"
+	endif
+endfunction
+
+function Tfoo( foo )
+	echom a:foo
+endfunction

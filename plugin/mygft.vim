@@ -6,7 +6,6 @@ iab atn 	@todo-next
 iab atw		@todo-wait
 iab atc 	@todo-changes
 iab tb		@thinkbox
-iab atp		@todo :prototyp
 iab <expr> heu strftime("=%Y%m%d")
 iab <expr> tom strftime("%%%Y%m%d", localtime(  ) + ( 24*3600 ))
 iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
@@ -23,16 +22,18 @@ iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 " um mit project_notes besser zu arbeiten
 ""nmap ,d <ESC>:s/@todo-next/@done/<CR>:w<CR>
 " replaces no every variation of @todo*"
-"nmap ,d <ESC>:s/@todo.\{-} /@done /<CR>:w<CR>
+nmap ,d <ESC>:call ToDo( "done" )<CR>
+nmap ,w <ESC>:call ToDo( "wait" )<CR>
+nmap ,o <ESC>:call ToDo( "todo" )<CR>
+nmap ,c <ESC>:call ToDo( "cancel" )<CR>
+"
 "nmap ,d <ESC>:Tododone<CR>:w<CR>
-nmap ,d <ESC>:call Tdone()<CR>
-nmap ,o <ESC>:Todotodo<CR>:w<CR>
+"nmap ,o <ESC>:Todotodo<CR>:w<CR>
+"nmap ,c <ESC>:Todocancel<CR>:w<CR>
+
+"nmap ,d <ESC>:s/@todo.\{-} /@done /<CR>:w<CR>
 "nmap ,w <ESC>:s/@todo.\{-} /@todo-wait /<CR>:w<CR>
-nmap ,w <ESC>:Todocwait<CR>:w<CR>
 "nmap ,c <ESC>:s/@todo.\{-} /@canceled /<CR>:w<CR>
-nmap ,c <ESC>:Todocancel<CR>:w<CR>
-" obsolent: with ,d"
-""nmap ,f <ESC>:s/@todo-wait/@done/<CR>:w<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
 nmap ,t <ESC>:Todos<CR>:w<CR>
 nmap ,l <ESC>:Log<CR>
@@ -267,15 +268,25 @@ endif
 
 
 "relpace @todo wit @done"
-function! Tdone(  )
-	""let line=getline('.')
-	""let newline = substitute(line, "@todo", "@done", "")
-	"let newline = substitute(line, "@todo.*? ", "@done", "")
-	""call setline('.', newline)
-	"":w
+function! ToDo( type )
 " http://stackoverflow.com/a/26214054/1933185
+" function! foo( ... )
+" ... means, the function accept variable amount of parameters 0-n
+" a:0 is the amount of parameters
+" a:1 is the first parameter, a:2 is the second...
 
-	:s/@todo\%(-\w\+\)* /@done / 
+	if a:type == "done"
+		:s/@todo\%(-\w\+\)* /@done / 
+	elseif a:type == "wait"
+		:s/@todo\%(-\w\+\)* /@todo-wait / 
+		":s/@todo.\{-} /@todo-wait /
+	elseif a:type == "todo"
+		:s/@todo\%(-\w\+\)* /@todo / 
+	elseif a:type == "cancel"
+		:s/@todo\%(-\w\+\)* /@canceled / 
+	elseif a:type == "next"
+		:s/@todo\%(-\w\+\)* /@todo-next / 
+	endif
 	:w
 endfunction
-"command! Tdone call Tdone()
+"command! ToDo call ToDo("done")
