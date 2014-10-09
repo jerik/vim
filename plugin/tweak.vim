@@ -44,6 +44,7 @@ command! Vimrc call Vimrc()
 :command! Sand Sandbox
 " Perhaps switch for OS needed, as vimfiles is in *nix .vim "
 :command! Sandbox :e $HOME/vimfiles/plugin/sandbox.vim
+:command! Tweak :e $HOME/vimfiles/plugin/tweak.vim
 
 imap ;; <ESC>:normal A;<CR>:w<CR>
 nmap ;; <ESC>:normal A;<CR>:w<CR>
