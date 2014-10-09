@@ -1,3 +1,16 @@
+" Boost programming in vim
+inoremap { {  }<LEFT><LEFT>
+inoremap [ []<LEFT>
+inoremap ( (  )<LEFT><LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+inoremap \| \|\|<LEFT>
+
+"ruby support"
+"inoremap <% <%=   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
+"inoremap ,end <% end  %> 
+"inoremap ,if <% if   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
+
 "	Rechtschreibfehler automatisch verbessern
 "	See also:  http://www.igd.fhg.de/~zach/programs/acl/
 iab alos    also
