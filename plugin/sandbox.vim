@@ -25,6 +25,6 @@ function! TTest( ... )
 	endif
 endfunction
 
-function Tfoo( foo )
+function! Tfoo( foo )
 	echom a:foo
 endfunction

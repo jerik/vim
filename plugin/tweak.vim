@@ -37,7 +37,10 @@ function! Vimrc()
 		let s:vimrc = "_vimrc"
 	endif 
 	echo s:vimrc
-    exec ":e $HOME/" . s:vimrc
+    ""exec ":e $HOME/" . s:vimrc
+	" IF this works, the I do not need the OS-Switch :)
+	" see: http://www.bestofvim.com/tip/auto-reload-your-vimrc/
+	:e $MYVIMRC
 endfunction
 command! Vimrc call Vimrc()
 

@@ -18,6 +18,16 @@ iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 " http://aftnn.org/post/47880443079/strip-tags-in-a-vim-buffer
 :command! STag :%s/<\_.\{-1,\}>//g  
 
+" jerik 20141013
+" add bullet points '-' in front of sentences"
+" Example: 
+"    this is a point
+"       and this is another point
+" After the command: 
+"  - this is a point
+"     - and this is another point
+" mainly used to format lists that I take via copy/paste into vim
+:command! List :'<,'>s/\w/- &
 
 " um mit project_notes besser zu arbeiten
 ""nmap ,d <ESC>:s/@todo-next/@done/<CR>:w<CR>
