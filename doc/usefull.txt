@@ -58,8 +58,47 @@ ruby snippets												*jk-ruby*
 object.inspect 					gibt debug für object aus
 string.strip					entfernt whitespace vorne u. hinten, auch \r\n
   
+Productive												*jk-productive*
+-----------------------------------------------------------------------------
+# Konsolidieren :) 
+Habit 1: Ruthlessly cut away the unimportant ( and Focus on the important)
+Habit 2: Allocate breaks strategically
+Habit 3: Remove productivity pitstops ( i.e. distractions)
+Habit 4: Tap into your inspiration
+Habit 5: Create barriers to entry
+Habit 6: Optimize time pockets
+Habit 7: Set timelines
+Habit 8: Automate everything possible
+Source:
+http://www.lifehack.org/articles/productivity/the-8-habits-highly-productive-people.html
+
+2. Take more breaks. 
+3. Follow the 80/20 rule.
+4. Use your morning to focus on yourself. 
+5. Tackle your challenging tasks before lunch.
+6. Improve your email etiquette. 
+7. Create a system.
+8. Stop confusing productivity with laziness.
+9. Stop multi-tasking.
+
+1. Choose 1-2 “big rocks” to tackle each day that will move your business
+forward 
+2. Start each day ( or work session) by “eating a frog”
+3. Single-task: do one thing at a time and be fully present for each task. 
+4. Manage your energy, not your time 
+5. For your biggest projects, identify every single task you need to complete;
+get it out of your head and onto a piece of paper
+
+
+Habit 1 – Be Proactive
+Habit 2 – Begin with the End in Mind
+Habit 3 – First Things First
+Habit 4 – Think Win Win
+Habit 5 – Seek First to Understand
+Habit 6 – Synergize ( Synergise)
+Habit 7 – Sharpen the Saw))))
+
 Platzhalter												*jk-platzhalterp*
 -----------------------------------------------------------------------------
 Lorem ipsum 
-
   vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:
