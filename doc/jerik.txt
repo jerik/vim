@@ -1,6 +1,6 @@
 *jk-scripting-help* *jerik*
 
-Tipps fürs vim scripting. Zur bessren konfiguration.
+Tipps fï¿½rs vim scripting. Zur bessren konfiguration.
 
 Abbreviations												*jk-abbr* 
 -----------------------------------------------------------------------------
@@ -25,15 +25,15 @@ Man kann auch Mappings auf eine abbreviation legen:
 Lokale Hilfe												*jk-local-help*
 -----------------------------------------------------------------------------
 Um die lokale hilfe in vim erreichbar zu machen, muss man nachfolgendes 
-Kommando ausführen. Dabei ist ~/.vim/doc das verzeichnis in dem ich den
-Hilfetext erstellt habe. (Sollte defaultmässig immer so sein)
+Kommando ausfï¿½hren. Dabei ist ~/.vim/doc das verzeichnis in dem ich den
+Hilfetext erstellt habe. (Sollte defaultmï¿½ssig immer so sein)
 
 	:helptags ~/.vim/doc								|add-local-help|
 
 
-Funktion ausführbar machen									*jk-add-function*
+Funktion ausfï¿½hrbar machen									*jk-add-function*
 -----------------------------------------------------------------------------
-Um eine Funktion ausführbar zu machen über den Commandline-Modus, muss man
+Um eine Funktion ausfï¿½hrbar zu machen ï¿½ber den Commandline-Modus, muss man
 die Funktion mit |command| registrieren.
 
 	function! Abc()
@@ -50,14 +50,14 @@ Besitzt die Funktion paramater, sieht das wiefolgt aus.
 	
 	command  -nargs=1 Xyz call Xyz("<args>")
 
-Wobei -nargs=1 aufzeigt wieviel parameter angegeben werden müssen. Sollen
+Wobei -nargs=1 aufzeigt wieviel parameter angegeben werden mï¿½ssen. Sollen
 parameter optional angegeben werden dann lautet mit '*', d.h. -nargs=*
 
 
 Concat - Variablen und Strings verbinden  					*jk-concat*
 -----------------------------------------------------------------------------
 Um eine variable mit einem string zu verbinden muss man den string in 
-Anführungszeichen setzen, und string mit varibale über den concatenator . 
+Anfï¿½hrungszeichen setzen, und string mit varibale ï¿½ber den concatenator . 
 verbinden
 
 	let FILE=foo
@@ -66,21 +66,21 @@ verbinden
 
 Execute the current File - 									*jk-execute*
 -----------------------------------------------------------------------------
-Um die Datei auszuführen die man gerade bearbeitet kann man nachfolgende
+Um die Datei auszufï¿½hren die man gerade bearbeitet kann man nachfolgende
 Kommandos in der .vimrc festlegen:
 
 	autocmd FileType python map <F7> :!python %<CR>
 	autocmd FileType sh map <F7> :!bash -c ./%<CR>
 
-Damit wir beim drücken von <F7> der entsprechende interpreter mit der 
-Datei ausgeführt. ODER:
+Damit wir beim drï¿½cken von <F7> der entsprechende interpreter mit der 
+Datei ausgefï¿½hrt. ODER:
 
     nnoremap <F12> :!%:p<CR>
 
 Siehe dazu auch ":help cmdline-special".
 	
 
-Vertikales Selektieren (Auswählen)					*jk-vert-select*
+Vertikales Selektieren (Auswï¿½hlen)					*jk-vert-select*
 -----------------------------------------------------------------------------
 Um in einer Textdatei Vertikal zu selektieren benutzt man den shortcut
 
@@ -104,7 +104,7 @@ Zeigt an in welcher Datei das Kommando definiert ist, bspw.
 	n  ,t            <Esc>:Todos<CR>:w<CR>
 			Last set from ~/.vim/plugin/mygft.vim
 
-Andere Möglichkeiten wären: 
+Andere Mï¿½glichkeiten wï¿½ren: 
 	:verbose filetype
 
 
@@ -121,18 +121,26 @@ Mehrere Option bei set werden mit Komma getrennt
     ohne header, in landscape :set popt=header:0,portrait:n 
 
 
-Suchen und löschen 						  					*jk-delete*
+Suchen und lï¿½schen 						  					*jk-delete*
 -----------------------------------------------------------------------------
-Alle Zeilen löschen die NICHT das pattern (Muster) enthalten 
+Alle Zeilen lï¿½schen die NICHT das pattern (Muster) enthalten 
 
 	:!g/pattern/d 
 	:v/pattern/d
 
-Alle Zeilen löschen die das pattern (Muster) enthalten 
+Alle Zeilen lï¿½schen die das pattern (Muster) enthalten 
 
 	:g/pattern/d
 
+Alle leere Zeilen lÃ¶schen
+	:%s/^$\n//g
+	
+Alle linebreaks loeschen, d.h. eine einzige Zeile erstellen
+	:%j
 
+Alle tags lÃ¶schen, contnet bleibt erhalten
+	:%s/<\_.\{-1,\}>//g
+	
 Suchen und kopieren (yank) 			  					*jk-yank* *jk-copy*
 -----------------------------------------------------------------------------
 Alle Zeilen in register "a kopieren, die das wort pattern enthalten 
@@ -141,9 +149,9 @@ Alle Zeilen in register "a kopieren, die das wort pattern enthalten
 	:g/pattern/y A
 
 :global findet alle vorkommen von pattern, danach kann man ex-operationen wie
-yank ( y ) oder delete ( d ) ausführen
+yank ( y ) oder delete ( d ) ausfï¿½hren
 
-Den kopierten Inhalt wieder einfügen: 
+Den kopierten Inhalt wieder einfï¿½gen: 
 	
 	"aP				Register a pasten
 
@@ -158,31 +166,31 @@ end-klammmer navigieren und folgenden eingeben:
 
 	v%			# bei ([{  
 	y%			# kopiert sofort alles bei ([{  
-	d%			# löscht alles bei ([{  
-	c%			# löscht alles bei ([{ und geht in den insert mode
+	d%			# lï¿½scht alles bei ([{  
+	c%			# lï¿½scht alles bei ([{ und geht in den insert mode
 
 Alles innerhalb von Klammern markieren. Dazu muss man innerhalb der Klammer
-sein: 	für kopieren y, löschen d, löschen und insert mode c, anstelle von v
+sein: 	fï¿½r kopieren y, lï¿½schen d, lï¿½schen und insert mode c, anstelle von v
 
 	vib 		# bei (
 	viB			# bei [
 	vit			# bei <tag>
 
-Alles innnherhalb von Anführungszeichen markieren. Dazu muss man innerhalb der
-Anführungzeichen sein: 	für kopieren y ,löschen d, löschen und insert mode c 
+Alles innnherhalb von Anfï¿½hrungszeichen markieren. Dazu muss man innerhalb der
+Anfï¿½hrungzeichen sein: 	fï¿½r kopieren y ,lï¿½schen d, lï¿½schen und insert mode c 
 anstelle von v
 
-	vi"			# bei " ( doppeltes Gänsefüsschen )
-	vi'			# bei ' ( einfaches Gänsefüsschen )
+	vi"			# bei " ( doppeltes Gï¿½nsefï¿½sschen )
+	vi'			# bei ' ( einfaches Gï¿½nsefï¿½sschen )
 
 
 Normal commands in insert mode						 *jk-insert*
 -----------------------------------------------------------------------------
-Um ein commando im normal mode während des insert modes auszuführen, kann man
-mit <C-o> (Strg + o) kurz in den Modus reinwechseln. Nach ausführen des
+Um ein commando im normal mode wï¿½hrend des insert modes auszufï¿½hren, kann man
+mit <C-o> (Strg + o) kurz in den Modus reinwechseln. Nach ausfï¿½hren des
 Kommandos ist man automatisch wieder im insert mode. 
 
-Bspw. wenn man an der ersten Zeile was einfügen will
+Bspw. wenn man an der ersten Zeile was einfï¿½gen will
 
 	<C-o>gg
 
