@@ -27,7 +27,7 @@ iab isodate <C-R>=strftime("%Y-%m-%d")<CR>
 
 "	Verbessertes arbeiten im Vim
 nmap ,h <ESC>:e $HOME/.vim/doc/jerik.txt<CR>
-" What does this function do 
+" 	Move between splitted windows
 nmap ,< <C-W>w
 ""nmap ö f"a
 nmap <M-v> f"a
