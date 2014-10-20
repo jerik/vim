@@ -6,6 +6,10 @@ inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
 inoremap \| \|\|<LEFT>
 
+" Use Leader c and Leader v to copy and paste using the OS clipboard: 
+map <Leader>v "+gP 
+map <Leader>c "+y
+
 "ruby support"
 "inoremap <% <%=   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
 "inoremap ,end <% end  %> 

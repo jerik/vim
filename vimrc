@@ -122,9 +122,11 @@ let g:vikiUpperCharacters = "A-ZÄÖÜ"
 "Add the Wiki suffix to an vikiword. means OtherIdea links to OtherIdea.txt"
 let g:vikiUseParentSuffix = 1
 
-" jerik: 20141006 http://stackoverflow.com/a/680271/1933185
-" copy paste with system clipboard on Windows
-set clipboard=unnamed
+" 	jerik: 20141006 http://stackoverflow.com/a/680271/1933185
+" 	copy paste with system clipboard on Windows
+" set clipboard=unnamed
+" 	jerik: 20141020
+" 	see :Tweak # looks interesting let's try :)
 
 " better colorschema"
 "color jerik
@@ -154,11 +156,15 @@ au BufRead,BufNewFile *.log set filetype=plog
 " 	jerik 20141014
 " 	Realod listed files if they are saved
 " 	http://www.bestofvim.com/tip/auto-reload-your-vimrc/
-augroup reload_vimrc "{ 
-	autocmd!
-	autocmd BufWritePost $MYVIMRC so $MYVIMRC
-	""autocmd BufWritePost $MYVIMRC so $MYVIMRC
-augroup "}
+" augroup reload_vimrc "{ 
+"	autocmd!
+"	autocmd BufWritePost $MYVIMRC so $MYVIMRC
+" augroup "}
+
+"	jerik 20141014
+"	DOES NOT WORK
+"	http://stackoverflow.com/questions/11068128/how-to-disable-vim-autocomplete-popup-for-plain-text-files
+" autocmd WinEnter * :if &ft=='vim' | DisableAcp | else | EnableAcp | endif
 
 "	jerik 20141014 
 "	@todo Do I need the tweak.vim or merge into .vimrc?
