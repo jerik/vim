@@ -195,4 +195,18 @@ Bspw. wenn man an der ersten Zeile was einfï¿½gen will
 	<C-o>gg
 
 
+Replace in vertical visual selection						 *jk-visual-replace*
+-----------------------------------------------------------------------------
+Um in einer vertical visuelle selction zu ersetzen, verwendet man \%V. Bspw. 
+	
+	:'<,'>s/\%V{pat}/{sub}/g
+
+Will man bei der selection unterschiedliche matches mit gleichen Inhalten ersetzten. 
+Bspw: wenn 3 spalten selektiert sind und man 123 einfügen will, d.h. 1. Spalte = 1
+2. Spalte = 2, 3. Spalte = 3
+
+	:'<,'>s/\%V.../123/g
+
+
+
   vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:

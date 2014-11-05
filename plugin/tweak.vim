@@ -6,9 +6,14 @@ inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
 inoremap \| \|\|<LEFT>
 
-" Use Leader c and Leader v to copy and paste using the OS clipboard: 
+" 	Use Leader c and Leader v to copy and paste using the OS clipboard: 
 map <Leader>v "+gP 
 map <Leader>c "+y
+" 	http://vim.wikia.com/wiki/Quick_command_in_insert_mode 
+"	insert OS clipboard in insert mode
+" inoremap VV <Esc>"+gp "works but leaves me in the normal mode, not the insert mode
+" 	http://stackoverflow.com/q/26486948/1933185
+inoremap VV <C-r>+
 
 "ruby support"
 "inoremap <% <%=   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
@@ -26,7 +31,19 @@ iab ydate <C-R>=strftime("%d.%m.%Y")<CR>
 iab isodate <C-R>=strftime("%Y-%m-%d")<CR>
 
 "	Verbessertes arbeiten im Vim
-nmap ,h <ESC>:e $HOME/.vim/doc/jerik.txt<CR>
+"nmap ,h <ESC>:e $HOME/.vim/doc/jerik.txt<CR>
+nmap ,h <ESC>:Myhelp<CR>
+" 	20141105: open my help file
+function! Myhelp(  )
+	let s:vimfolder = ".vim"
+	if has( "win32" )
+		let s:vimfolder = "vimfiles"
+	endif 
+	echo s:vimfolder
+    exec ":e $HOME/" . s:vimfolder . "/doc/jerik.txt"
+endfunction
+command! Myhelp call Myhelp()
+
 " 	Move between splitted windows
 nmap ,< <C-W>w
 ""nmap ö f"a
