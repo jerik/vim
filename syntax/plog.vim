@@ -22,7 +22,7 @@ syn match   done   		"^.done.*"
 syn match   cancel   	"^.canceled.*"
 syn match   todo   		"^.todo.*"
 syn match   back   		"^.back"
-syn match   vorschlag	"^.vorschlag"
+syn match   vorschlag	"^.decision"
 ""syn match   url     	"http:.*"
 ""syn match   urls     	"https:.*"
 
