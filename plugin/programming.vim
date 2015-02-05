@@ -1,4 +1,4 @@
-inoremap { {  }<LEFT><LEFT>
+"inoremap { {  }<LEFT><LEFT>
 inoremap [ []<LEFT>
 inoremap ( (  )<LEFT><LEFT>
 inoremap " ""<LEFT>
