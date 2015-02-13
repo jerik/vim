@@ -4,6 +4,8 @@
 "	http://cscope.sourceforge.net/cscope_vim_tutorial.html
 
 "	Kein piepen
+let mapleader = '-'
+
 set	noerrorbells
   
 "	Globale einstellungen für Tabstop und shiftwidth
@@ -39,6 +41,12 @@ set nohlsearch
 
 "	ignorecase:  ignore the case in search patterns?  NO!
 set noignorecase
+
+"	Color of the search
+"	GUI
+hi Search guibg=cyan guifg=black
+"	Terminal
+hi Search cterm=NONE ctermfg=black ctermbg=cyan
 
 "	laststatus:  show status line?  Yes, always!
 "	laststatus:  Even for only one buffer.
@@ -97,10 +105,13 @@ set whichwrap=<,>,h,l,[,]
 "	right screen-border is "n" spaces
 set wrapmargin=1
 
+"	Run the after ftplugin on startup"
+filetype plugin on
+
 "	Swapfiles nicht ins gleich verzeichnis schreiben, sondern in ein spezielles
-" set dir=/usr/swps
+set dir=/usr/swps
 " For windows OS, missing switch
-set dir=C:\Windows\Temp\swps
+"set dir=C:\swps
 
 
 "Viki settings:"
@@ -111,16 +122,25 @@ let g:vikiUpperCharacters = "A-ZÄÖÜ"
 "Add the Wiki suffix to an vikiword. means OtherIdea links to OtherIdea.txt"
 let g:vikiUseParentSuffix = 1
 
+" 	jerik: 20141006 http://stackoverflow.com/a/680271/1933185
+" 	copy paste with system clipboard on Windows
+" set clipboard=unnamed
+" 	jerik: 20141020
+" 	see :Tweak # looks interesting let's try :)
+
 " better colorschema"
 "color jerik
 
 " Fullscreen when opening vim # for winwos
-au GUIEnter * simalt ~x
+" http://unix.stackexchange.com/questions/40047/vim-script-check-running-platform
+if has( "win32" )
+	au GUIEnter * simalt ~x
+endif
 
 "Rails configuraiton - 2006-07-13 "
 "see: :h rails"
-autocmd User Rails* Lcd
-let g:rails_level=4
+"autocmd User Rails* Lcd
+"let g:rails_level=4
 
 "	Switch syntax highlighting on, when the terminal has colors
 "	Also switch on highlighting the last used search pattern.
@@ -129,5 +149,99 @@ if &t_Co > 2 || has("gui_running")
 	set hlsearch
 endif
 
-filetype plugin on
+" 	Projects notes mit neuer Syntax versehen
+au BufRead,BufNewFile *.log set filetype=plog 
 
+
+" 	jerik 20141014
+" 	Realod listed files if they are saved
+" 	http://www.bestofvim.com/tip/auto-reload-your-vimrc/
+" augroup reload_vimrc "{ 
+"	autocmd!
+"	autocmd BufWritePost $MYVIMRC so $MYVIMRC
+" augroup "}
+
+"	jerik 20141014
+"	DOES NOT WORK
+"	http://stackoverflow.com/questions/11068128/how-to-disable-vim-autocomplete-popup-for-plain-text-files
+" autocmd WinEnter * :if &ft=='vim' | DisableAcp | else | EnableAcp | endif
+
+"	jerik 20141014 
+"	@todo Do I need the tweak.vim or merge into .vimrc?
+"	Rehash: Reload my vim configuration files"
+function Rehash()
+	:so $HOME/vimfiles/plugin/tweak.vim
+	:so $HOME/vimfiles/plugin/sandbox.vim
+	echom "Reloaded tweak.vim, sandbox.vim"
+endfunction
+command! Rehash call Rehash()
+
+" jerik 20131128 
+" Unite configuration 
+""nnoremap f :Unite -start-insert file_rec<CR>
+nnoremap <Leader>f :Unite file_rec<CR>
+"nnoremap b :Unite buffer<CR> " cannot use b as move commend!
+
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
+
+
+" Neobundle: https://github.com/Shougo/neobundle.vim
+if has('vim_starting')
+  set nocompatible               " Be iMproved
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+""call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+""NeoBundleFetch 'Shougo/neobundle.vim'
+" Recommended to install
+" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+"NeoBundle 'Shougo/vimproc'
+" as from https://github.com/Shougo/vimproc.vim
+""NeoBundle 'Shougo/vimproc', {
+""      \ 'build' : {
+""      \     'windows' : 'make -f make_mingw32.mak',
+""      \     'mac' : 'make -f make_mac.mak',
+""      \     'unix' : 'make -f make_unix.mak',
+""      \    },
+""      \ }
+
+
+" My Bundles here:
+"
+""NeoBundle 'Shougo/vimshell.vim'
+""NeoBundle 'Shougo/unite.vim'
+""NeoBundle 'Shougo/neocomplcache.vim'
+
+" Note: You don't set neobundle setting in .gvimrc!
+" Original repos on github
+" NeoBundle 'tpope/vim-fugitive'
+" NeoBundle 'Lokaltog/vim-easymotion', '09c0cea8'   " This plugin is locked at revision 09c0cea8 
+" NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" vim-scripts repos
+"NeoBundle 'L9'
+"NeoBundle 'FuzzyFinder'
+"NeoBundle 'rails.vim'
+" Non github repos
+" NeoBundle 'git://git.wincent.com/command-t.git'
+" gist repos
+" NeoBundle 'gist:Shougo/656148', {
+"      \ 'name': 'everything.vim',
+"      \ 'script_type': 'plugin'}
+" Non git repos
+" NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
+" NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
+
+
+""filetype plugin indent on     " Required!
+"
+" Brief help
+" :NeoBundleList          - list configured bundles
+" :NeoBundleInstall(!)    - install(update) bundles
+" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+
+" Installation check.
+""NeoBundleCheck

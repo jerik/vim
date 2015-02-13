@@ -193,28 +193,28 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-""call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
-""NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundleFetch 'Shougo/neobundle.vim'
 " Recommended to install
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 "NeoBundle 'Shougo/vimproc'
 " as from https://github.com/Shougo/vimproc.vim
-""NeoBundle 'Shougo/vimproc', {
-""      \ 'build' : {
-""      \     'windows' : 'make -f make_mingw32.mak',
-""      \     'mac' : 'make -f make_mac.mak',
-""      \     'unix' : 'make -f make_unix.mak',
-""      \    },
-""      \ }
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
 
 " My Bundles here:
 "
-""NeoBundle 'Shougo/vimshell.vim'
-""NeoBundle 'Shougo/unite.vim'
-""NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'Shougo/vimshell.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplcache.vim'
 
 " Note: You don't set neobundle setting in .gvimrc!
 " Original repos on github
@@ -236,7 +236,7 @@ endif
 " NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 
 
-""filetype plugin indent on     " Required!
+filetype plugin indent on     " Required!
 "
 " Brief help
 " :NeoBundleList          - list configured bundles
@@ -244,4 +244,4 @@ endif
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 " Installation check.
-""NeoBundleCheck
+NeoBundleCheck
