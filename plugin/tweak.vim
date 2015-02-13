@@ -31,44 +31,49 @@ iab ydate <C-R>=strftime("%d.%m.%Y")<CR>
 iab isodate <C-R>=strftime("%Y-%m-%d")<CR>
 
 "	Verbessertes arbeiten im Vim
-"nmap ,h <ESC>:e $HOME/.vim/doc/jerik.txt<CR>
 nmap ,h <ESC>:Myhelp<CR>
-" 	20141105: open my help file
-function! Myhelp(  )
-	let s:vimfolder = ".vim"
-	if has( "win32" )
-		let s:vimfolder = "vimfiles"
-	endif 
-	echo s:vimfolder
-    exec ":e $HOME/" . s:vimfolder . "/doc/jerik.txt"
-endfunction
-command! Myhelp call Myhelp()
+" Open vimrc with ,v shortcut
+nmap ,v <ESC>:e $MYVIMRC<CR>
 
 " 	Move between splitted windows
 nmap ,< <C-W>w
 ""nmap ö f"a
+" 20150213 Was bringt mir das?
 nmap <M-v> f"a
 
-" Open vimrc with ,v shortcut
-""nmap ,v <ESC>:e $HOME/.vimrc<CR>
-nmap ,v <ESC>:Vimrc<CR>
-function! Vimrc()
-	let s:vimrc = ".vimrc"
-	if has( "win32" )
-		let s:vimrc = "_vimrc"
-	endif 
-	echo s:vimrc
-    ""exec ":e $HOME/" . s:vimrc
-	" IF this works, the I do not need the OS-Switch :)
-	" see: http://www.bestofvim.com/tip/auto-reload-your-vimrc/
-	:e $MYVIMRC
-endfunction
-command! Vimrc call Vimrc()
+" jerik 20150213 get easy access to tweak and sandbox
+function! MyVimFiles( command )
+	"
+	"default is tweak.vim
+	let s:file = "/plugin/tweak.vim"
 
-:command! Sand Sandbox
+	if a:command == "myhelp"
+		let s:file = "/doc/jerik.txt"
+	elseif a:command == "sandbox"
+		let s:file = "/plugin/sandbox.vim"
+	endif
+	echo s:file
+    ""exec ":e $HOME/" . s:vimfolder . s:file
+    ""exec ":e $HOME/" . MyVimFolder() . s:file
+    exec ":e " . MyVimFolder() . s:file
+endfunction
+
+" jerik 20150213 return the vim folder based on the current OS
+function! MyVimFolder(  )
+	let s:vimfolder = ".vim"
+	if has( "win32" )
+		let s:vimfolder = "vimfiles"
+	endif 
+	return "$HOME/" . s:vimfolder
+endfunction
+
+
 " Perhaps switch for OS needed, as vimfiles is in *nix .vim "
-:command! Sandbox :e $HOME/vimfiles/plugin/sandbox.vim
-:command! Tweak :e $HOME/vimfiles/plugin/tweak.vim
+":command! Sandbox :e $HOME/vimfiles/plugin/sandbox.vim
+":command! Tweak :e $HOME/vimfiles/plugin/tweak.vim
+command! Sandbox call MyVimFiles( "sandbox" )
+command! Tweak call MyVimFiles( "tweak" )
+command! Myhelp call MyVimFiles( "myhelp" )
 
 imap ;; <ESC>:normal A;<CR>:w<CR>
 nmap ;; <ESC>:normal A;<CR>:w<CR>

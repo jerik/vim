@@ -169,9 +169,11 @@ au BufRead,BufNewFile *.log set filetype=plog
 "	jerik 20141014 
 "	@todo Do I need the tweak.vim or merge into .vimrc?
 "	Rehash: Reload my vim configuration files"
-function Rehash()
-	:so $HOME/vimfiles/plugin/tweak.vim
-	:so $HOME/vimfiles/plugin/sandbox.vim
+function! Rehash()
+	":so $HOME/vimfiles/plugin/tweak.vim
+	":so $HOME/vimfiles/plugin/sandbox.vim
+    exec ":so " . MyVimFolder() . "/plugin/tweak.vim"
+    exec ":so " . MyVimFolder() . "/plugin/sandbox.vim"
 	echom "Reloaded tweak.vim, sandbox.vim"
 endfunction
 command! Rehash call Rehash()
