@@ -1,3 +1,110 @@
+" Boost programming in vim
+inoremap { {  }<LEFT><LEFT>
+inoremap [ []<LEFT>
+inoremap ( (  )<LEFT><LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
+inoremap \| \|\|<LEFT>
+
+" 	Use Leader c and Leader v to copy and paste using the OS clipboard: 
+map <Leader>v "+gP 
+map <Leader>c "+y
+" 	http://vim.wikia.com/wiki/Quick_command_in_insert_mode 
+"	insert OS clipboard in insert mode
+" inoremap VV <Esc>"+gp "works but leaves me in the normal mode, not the insert mode
+" 	http://stackoverflow.com/q/26486948/1933185
+inoremap VV <C-r>+
+
+"ruby support"
+"inoremap <% <%=   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
+"inoremap ,end <% end  %> 
+"inoremap ,if <% if   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
+
+"	Rechtschreibfehler automatisch verbessern
+"	See also:  http://www.igd.fhg.de/~zach/programs/acl/
+iab alos    also
+iab aslo    also
+iab sonder	sondern
+
+" 	hilfreiche Ersetzungen
+iab ydate <C-R>=strftime("%d.%m.%Y")<CR>
+iab isodate <C-R>=strftime("%Y-%m-%d")<CR>
+
+"	Verbessertes arbeiten im Vim
+"nmap ,h <ESC>:e $HOME/.vim/doc/jerik.txt<CR>
+nmap ,h <ESC>:Myhelp<CR>
+" 	20141105: open my help file
+function! Myhelp(  )
+	let s:vimfolder = ".vim"
+	if has( "win32" )
+		let s:vimfolder = "vimfiles"
+	endif 
+	echo s:vimfolder
+    exec ":e $HOME/" . s:vimfolder . "/doc/jerik.txt"
+endfunction
+command! Myhelp call Myhelp()
+
+" 	Move between splitted windows
+nmap ,< <C-W>w
+""nmap ö f"a
+nmap <M-v> f"a
+
+" Open vimrc with ,v shortcut
+""nmap ,v <ESC>:e $HOME/.vimrc<CR>
+nmap ,v <ESC>:Vimrc<CR>
+function! Vimrc()
+	let s:vimrc = ".vimrc"
+	if has( "win32" )
+		let s:vimrc = "_vimrc"
+	endif 
+	echo s:vimrc
+    ""exec ":e $HOME/" . s:vimrc
+	" IF this works, the I do not need the OS-Switch :)
+	" see: http://www.bestofvim.com/tip/auto-reload-your-vimrc/
+	:e $MYVIMRC
+endfunction
+command! Vimrc call Vimrc()
+
+:command! Sand Sandbox
+" Perhaps switch for OS needed, as vimfiles is in *nix .vim "
+:command! Sandbox :e $HOME/vimfiles/plugin/sandbox.vim
+:command! Tweak :e $HOME/vimfiles/plugin/tweak.vim
+
+imap ;; <ESC>:normal A;<CR>:w<CR>
+nmap ;; <ESC>:normal A;<CR>:w<CR>
+
+"	001201:  Deleting text in normal mode
+"	using the BackSpace and Delete keys:
+nmap <BS>  X
+nmap <DEL> x
+nmap <F12> <ESC>:w<CR>
+
+"	jerik: Löschen von Text im insert mode
+"	WICHTIG, die Backspacetaste löscht wie sie soll nach <--
+imap <DEL> <DEL>
+imap <F12> <ESC>:w<CR>
+
+"	jerik: zwischen den Buffern wechseln - vorwärts"
+" Entfernen Taste (Funktionalität) auch über shift + Backspace
+nmap <C-Tab> :bn<CR>
+imap <C-Tab> :bn<CR>
+" verfügbar machen.
+""imap <S-BS> <DEL>
+
+" jerik 2009-02-10: Text in den zwischenspeicher kopieren, damit man diesen woanders mit strg + v einfügen kann
+" http://codecocktail.wordpress.com/2008/10/27/vim-copypaste/
+" normalerweise um eine zeile zu kopieren: "+dd
+nmap <M-d> "+dd
+
+"" jerik: Sobald ich mich im Vim mit dem Cursor bewege verschwinden alle search highligts
+"" Tip: 14 http://www.vim.org/tips/tip.php?tip_id=14 in den Comments
+""map j <Down>:noh<CR>
+""map k <Up>:noh<CR>
+""map h <Left>:noh<CR>
+""map l <Right>:noh<CR>
+
+" ************************ old mygft.vim
+
 " my project vim
 
 " For a better workspace logfiles 
@@ -19,19 +126,36 @@ iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 " http://aftnn.org/post/47880443079/strip-tags-in-a-vim-buffer
 :command! STag :%s/<\_.\{-1,\}>//g  
 
+" 	jerik 20141015
+" 	Show all tags in my journal. A tag is =tag =test =foobar
+:command! Tags /=\w\+
+
+" 	jerik 20141013
+" 	add bullet points '-' in front of sentences"
+" 	Example: 
+"    this is a point
+"       and this is another point
+" 	After the command: 
+"  	 - this is a point
+"      - and this is another point
+" 	mainly used to format lists that I take via copy/paste into vim
+:command! List :'<,'>s/\w/- &
 
 " um mit project_notes besser zu arbeiten
 ""nmap ,d <ESC>:s/@todo-next/@done/<CR>:w<CR>
 " replaces no every variation of @todo*"
+nmap ,d <ESC>:call ToDo( "done" )<CR>
+nmap ,w <ESC>:call ToDo( "wait" )<CR>
+nmap ,o <ESC>:call ToDo( "todo" )<CR>
+nmap ,c <ESC>:call ToDo( "cancel" )<CR>
+"
+"nmap ,d <ESC>:Tododone<CR>:w<CR>
+"nmap ,o <ESC>:Todotodo<CR>:w<CR>
+"nmap ,c <ESC>:Todocancel<CR>:w<CR>
+
 "nmap ,d <ESC>:s/@todo.\{-} /@done /<CR>:w<CR>
-nmap ,d <ESC>:Tododone<CR>:w<CR>
-nmap ,o <ESC>:Todotodo<CR>:w<CR>
 "nmap ,w <ESC>:s/@todo.\{-} /@todo-wait /<CR>:w<CR>
-nmap ,w <ESC>:Todocwait<CR>:w<CR>
 "nmap ,c <ESC>:s/@todo.\{-} /@canceled /<CR>:w<CR>
-nmap ,c <ESC>:Todocancel<CR>:w<CR>
-" obsolent: with ,d"
-""nmap ,f <ESC>:s/@todo-wait/@done/<CR>:w<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
 nmap ,t <ESC>:Todos<CR>:w<CR>
 nmap ,l <ESC>:Log<CR>
@@ -263,3 +387,28 @@ command! -nargs=1 Done :call Search( "@done", "<args>" )
 command! -nargs=1 Find :call Search( " ", "<args>" )
 
 endif
+
+
+"relpace @todo wit @done"
+function! ToDo( type )
+" http://stackoverflow.com/a/26214054/1933185
+" function! foo( ... )
+" ... means, the function accept variable amount of parameters 0-n
+" a:0 is the amount of parameters
+" a:1 is the first parameter, a:2 is the second...
+
+	if a:type == "done"
+		:s/@todo\%(-\w\+\)* /@done / 
+	elseif a:type == "wait"
+		:s/@todo\%(-\w\+\)* /@todo-wait / 
+		":s/@todo.\{-} /@todo-wait /
+	elseif a:type == "todo"
+		:s/@todo\%(-\w\+\)* /@todo / 
+	elseif a:type == "cancel"
+		:s/@todo\%(-\w\+\)* /@canceled / 
+	elseif a:type == "next"
+		:s/@todo\%(-\w\+\)* /@todo-next / 
+	endif
+	:w
+endfunction
+"command! ToDo call ToDo("done")

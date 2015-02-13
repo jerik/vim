@@ -42,6 +42,12 @@ set nohlsearch
 "	ignorecase:  ignore the case in search patterns?  NO!
 set noignorecase
 
+"	Color of the search
+"	GUI
+hi Search guibg=cyan guifg=black
+"	Terminal
+hi Search cterm=NONE ctermfg=black ctermbg=cyan
+
 "	laststatus:  show status line?  Yes, always!
 "	laststatus:  Even for only one buffer.
 set laststatus=2
@@ -116,6 +122,12 @@ let g:vikiUpperCharacters = "A-ZÄÖÜ"
 "Add the Wiki suffix to an vikiword. means OtherIdea links to OtherIdea.txt"
 let g:vikiUseParentSuffix = 1
 
+" 	jerik: 20141006 http://stackoverflow.com/a/680271/1933185
+" 	copy paste with system clipboard on Windows
+" set clipboard=unnamed
+" 	jerik: 20141020
+" 	see :Tweak # looks interesting let's try :)
+
 " better colorschema"
 "color jerik
 
@@ -127,8 +139,8 @@ endif
 
 "Rails configuraiton - 2006-07-13 "
 "see: :h rails"
-autocmd User Rails* Lcd
-let g:rails_level=4
+"autocmd User Rails* Lcd
+"let g:rails_level=4
 
 "	Switch syntax highlighting on, when the terminal has colors
 "	Also switch on highlighting the last used search pattern.
@@ -137,8 +149,32 @@ if &t_Co > 2 || has("gui_running")
 	set hlsearch
 endif
 
-" Projects notes mit neuer Syntax versehen" 
+" 	Projects notes mit neuer Syntax versehen
 au BufRead,BufNewFile *.log set filetype=plog 
+
+
+" 	jerik 20141014
+" 	Realod listed files if they are saved
+" 	http://www.bestofvim.com/tip/auto-reload-your-vimrc/
+" augroup reload_vimrc "{ 
+"	autocmd!
+"	autocmd BufWritePost $MYVIMRC so $MYVIMRC
+" augroup "}
+
+"	jerik 20141014
+"	DOES NOT WORK
+"	http://stackoverflow.com/questions/11068128/how-to-disable-vim-autocomplete-popup-for-plain-text-files
+" autocmd WinEnter * :if &ft=='vim' | DisableAcp | else | EnableAcp | endif
+
+"	jerik 20141014 
+"	@todo Do I need the tweak.vim or merge into .vimrc?
+"	Rehash: Reload my vim configuration files"
+function Rehash()
+	:so $HOME/vimfiles/plugin/tweak.vim
+	:so $HOME/vimfiles/plugin/sandbox.vim
+	echom "Reloaded tweak.vim, sandbox.vim"
+endfunction
+command! Rehash call Rehash()
 
 " jerik 20131128 
 " Unite configuration 
@@ -157,28 +193,28 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+""call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+""NeoBundleFetch 'Shougo/neobundle.vim'
 " Recommended to install
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 "NeoBundle 'Shougo/vimproc'
 " as from https://github.com/Shougo/vimproc.vim
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
+""NeoBundle 'Shougo/vimproc', {
+""      \ 'build' : {
+""      \     'windows' : 'make -f make_mingw32.mak',
+""      \     'mac' : 'make -f make_mac.mak',
+""      \     'unix' : 'make -f make_unix.mak',
+""      \    },
+""      \ }
 
 
 " My Bundles here:
 "
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
+""NeoBundle 'Shougo/vimshell.vim'
+""NeoBundle 'Shougo/unite.vim'
+""NeoBundle 'Shougo/neocomplcache.vim'
 
 " Note: You don't set neobundle setting in .gvimrc!
 " Original repos on github
@@ -200,7 +236,7 @@ NeoBundle 'Shougo/neocomplcache.vim'
 " NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 
 
-filetype plugin indent on     " Required!
+""filetype plugin indent on     " Required!
 "
 " Brief help
 " :NeoBundleList          - list configured bundles
@@ -208,4 +244,4 @@ filetype plugin indent on     " Required!
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 " Installation check.
-NeoBundleCheck
+""NeoBundleCheck
