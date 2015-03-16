@@ -6,6 +6,10 @@ inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
 inoremap \| \|\|<LEFT>
 
+" Toogle ignorecase on search
+" http://stackoverflow.com/a/2317808/19335
+nmap <F9> :set ignorecase! ignorecase?<CR>
+
 " 	Use Leader c and Leader v to copy and paste using the OS clipboard: 
 map <Leader>v "+gP 
 map <Leader>c "+y

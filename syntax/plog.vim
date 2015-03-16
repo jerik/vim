@@ -53,7 +53,7 @@ if version >= 508 || !exists("did_apachelogs_syntax_inits")
   HiLink pcom		Comment
   HiLink done  		Special
   HiLink cancel  	Special
-  HiLink postponed  	Special
+  HiLink postponed  Folded
   HiLink todo   	Todo
   HiLink back   	Type
   HiLink vorschlag	String
