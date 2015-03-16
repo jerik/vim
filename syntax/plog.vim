@@ -20,6 +20,7 @@ syn match	pcom	  	"\#.*"
 syn match   embraced  	"\".*\"" contains=ip,time
 syn match   done   		"^.done.*"
 syn match   cancel   	"^.canceled.*"
+syn match   postponed  	"^.postponed.*"
 syn match   todo   		"^.todo.*"
 syn match   back   		"^.back"
 syn match   vorschlag	"^.decision"
@@ -52,6 +53,7 @@ if version >= 508 || !exists("did_apachelogs_syntax_inits")
   HiLink pcom		Comment
   HiLink done  		Special
   HiLink cancel  	Special
+  HiLink postponed  	Special
   HiLink todo   	Todo
   HiLink back   	Type
   HiLink vorschlag	String
