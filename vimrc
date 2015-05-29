@@ -88,6 +88,7 @@ set splitbelow
 "	set   statusline=[%n]\ %f\ %(\ %M%R%H)%)
 "	set   statusline=[%n]\ %f\ %(\ %M%R%H)%)\=Pos=<%l\,%c%V>\ %P\=ASCII=%b\ HEX=%B)%=(c)\ Michael\ Prokop
 "	Meine favorisierte statusline:
+"	is now overrule by air-line
 set statusline=%<[%n]\%f\%y\%r\%1*%m%*%w%=%(Spalte:\%c%V%)%4(%)%-10(Zeile:\%l%)\%4(%)%p%%\%P\ \ \ \ ASCII=%b\ HEX=%B\ \ \ \ \ [jerik]
 
 "	ttyscroll:      turn off scrolling -> faster!
@@ -116,6 +117,7 @@ set dir=/usr/swps
 
 "Viki settings:"
 " this is in iso-latin-1
+" @todo Not sure if this still works...
 let g:vikiLowerCharacters = "a-zäöüßáàéèíìóòçñ"
 let g:vikiUpperCharacters = "A-ZÄÖÜ"
 
@@ -195,13 +197,17 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
+" vim-airline
+" Needs the powerline fonts, installed. Does not work out of the box
+"let g:airline_powerline_fonts = 1
+
 call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
 " Recommended to install
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
-"NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc'
 " as from https://github.com/Shougo/vimproc.vim
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -212,7 +218,9 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 
 
-" Run :Neobundleinstall <bundlename>
+" Run :Neobundleinstall!
+" after that I chanaged to ~/vim did a git status and openen the neobundle
+" info file
 " My Bundles here:
 "
 NeoBundle 'Shougo/vimshell.vim'
