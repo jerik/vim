@@ -212,11 +212,13 @@ NeoBundle 'Shougo/vimproc', {
       \ }
 
 
+" Run :Neobundleinstall <bundlename>
 " My Bundles here:
 "
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
+NeoBundle 'bling/vim-airline'
 
 " Note: You don't set neobundle setting in .gvimrc!
 " Original repos on github
