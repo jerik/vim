@@ -57,7 +57,7 @@ parameter optional angegeben werden dann lautet mit '*', d.h. -nargs=*
 Concat - Variablen und Strings verbinden  					*jk-concat*
 -----------------------------------------------------------------------------
 Um eine variable mit einem string zu verbinden muss man den string in 
-Anfï¿½hrungszeichen setzen, und string mit varibale ï¿½ber den concatenator . 
+Anführungszeichen setzen, und string mit varibale über den concatenator . 
 verbinden
 
 	let FILE=foo
@@ -121,7 +121,28 @@ Mehrere Option bei set werden mit Komma getrennt
     ohne header, in landscape :set popt=header:0,portrait:n 
 
 
-Suchen und lï¿½schen 						  					*jk-delete*
+
+Suchen case (in-)sensitive 						  					*jk-search-case*
+-----------------------------------------------------------------------------
+Die Normale suche sucht case-sensitive. Will man case-insensitive suchen, dann 
+mittels \c
+
+	/\cfoobar 
+
+hat man in der .vim konfigurationdatei folgenes angegeben
+
+	set ignorecase
+
+dann kann man mittels \C case-sensitive suchen 
+
+Ich hab folgendes konfiguriert um die Suche zu switchen ( in der tweak datei )
+Damit kann man mittels F9 live umschalten.
+
+	nmap <F9> :set ignorecase! ignorecase?<CR>
+
+
+
+Suchen und löschen 						  					*jk-delete*
 -----------------------------------------------------------------------------
 Alle Zeilen lï¿½schen die NICHT das pattern (Muster) enthalten 
 
