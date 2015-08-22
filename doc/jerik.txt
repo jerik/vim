@@ -205,6 +205,26 @@ anstelle von v
 	vi'			# bei ' ( einfaches G�nsef�sschen )
 
 
+Spring innerhalb von Quellcode					*jk-select*
+-----------------------------------------------------------------------------
+Innerhlab vom Quellcode gibt es sprungfunktionen zum start/ende von Klammern
+oder zum start einer Funktion:
+
+	[[			springt zur Start der derzeitigen/vorherigen Funktion
+	]]			springt zur Start der nachfolgenden Funktion
+	[{			springt zur Start der { im derzeitigen Codeblock
+	]}			springt zur Ende der } im derzeitigen Codeblock
+	[(			springt zur Start der ( in der derzeitigen Funktion
+	])			springt zur Ende der ) in der derzeitigen Funktion
+	<S-5>		springt passenden schliessenden Klammer von der Position
+	<S-6>		springt zum ersten Zeichen der Zeile
+
+	y%			# kopiert sofort alles bei   
+	d%			# l�scht alles bei ([{  
+	c%			# l�scht alles bei ([{ und geht in den insert mode
+
+Alles innerhalb von Klammern markieren. Dazu muss man innerhalb der Klammer
+
 Normal commands in insert mode						 *jk-insert*
 -----------------------------------------------------------------------------
 Um ein commando im normal mode w�hrend des insert modes auszuf�hren, kann man
