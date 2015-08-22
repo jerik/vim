@@ -22,6 +22,7 @@
 	alias = ! git config --get-regexp ^alias.
 	ad = add --all . 
 	morning = pull
+	mor = pull
 	day = pull
 [push]
 	default = simple
