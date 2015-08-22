@@ -236,6 +236,13 @@ Bspw. wenn man an der ersten Zeile was einf�gen will
 	<C-o>gg
 
 
+Count lines						 *jk-count*
+-----------------------------------------------------------------------------
+Um markierte Zeilen zu zählen, und die darin enthaltenen Wörter: 
+
+	g<C-g>
+
+
 Replace in vertical visual selection						 *jk-visual-replace*
 -----------------------------------------------------------------------------
 Um in einer vertical visuelle selction zu ersetzen, verwendet man \%V. Bspw. 

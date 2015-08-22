@@ -1,0 +1,30 @@
+[user]
+	name = Erik Heinz
+	email = jerik@gmx.net
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	d = difftool
+	co = checkout
+	br = branch
+	ci = commit
+	cm = commit -am 
+	st = status
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	alias = ! git config --get-regexp ^alias.
+	ad = add --all . 
+	morning = pull
+	day = pull
+[push]
+	default = simple
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
