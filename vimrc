@@ -6,6 +6,8 @@
 "	http://kien.github.io/ctrlp.vim/ - tool for file searching
 "	https://github.com/rking/ag.vim/blob/master/README.md - tool for file
 "	searching
+"	https://github.com/osyo-manga/vim-over - see search and replaces before
+"	you execute
 
 let mapleader = '-'
 
