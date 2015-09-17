@@ -4,10 +4,9 @@
 "	Villeicht interessant:
 "	http://cscope.sourceforge.net/cscope_vim_tutorial.html
 "	http://kien.github.io/ctrlp.vim/ - tool for file searching
-"	https://github.com/rking/ag.vim/blob/master/README.md - tool for file
-"	searching
-"	https://github.com/osyo-manga/vim-over - see search and replaces before
-"	you execute
+"	https://github.com/rking/ag.vim/blob/master/README.md - tool for file searching
+"	https://github.com/osyo-manga/vim-over - see search and replaces before you execute
+"	http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 
 let mapleader = '-'
 
