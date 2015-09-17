@@ -236,7 +236,7 @@ Bspw. wenn man an der ersten Zeile was einfï¿½gen will
 	<C-o>gg
 
 
-Count lines						 *jk-count*
+Count lines												 *jk-count*
 -----------------------------------------------------------------------------
 Um markierte Zeilen zu zÃ¤hlen, und die darin enthaltenen WÃ¶rter: 
 
@@ -254,6 +254,46 @@ Bspw: wenn 3 spalten selektiert sind und man 123 einfügen will, d.h. 1. Spalte =
 2. Spalte = 2, 3. Spalte = 3
 
 	:'<,'>s/\%V.../123/g
+
+
+Replace things						 *jk-replace-things*
+-----------------------------------------------------------------------------
+Um die vorherige Suche im replace zu verwenden
+	
+	/foo
+	:%s//{sub}/g
+
+Replace nutzt die letzte suche für das search and replace. In diesem Fall "foo"
+
+Replace nur auf bestätigung durchführen. Dann nutzt man die option c ( check). 
+Damit erhält man bei jedem foo eine Frage was damit zu tun ist: y(es), n(o)
+
+	%s/foo/bar/gc
+
+Register und Zugriff										 *jk-regsiter*
+-----------------------------------------------------------------------------
+Anzeigen was man alles in seinen Registern hat
+	
+	:registers
+
+Folgenden interessate Register gibt es ( Auszug ):
+
+	"" letzter yank
+	"/ letze suche
+	"% aktueller Dateiname
+	"# vorheriger Buffer dateiname
+	": letztes ex commando
+	"* aktueller OS copy register
+	". aktelles ausgeführter punkt-ding in vim
+
+Zugriff auf die Register erhält man mit 
+	<C-R>register
+
+Beispielsweise paste der letzten suche
+	<C-R>/
+
+Beispielsweise paste des OS copy registers
+	<C-R>*
 
 
 
