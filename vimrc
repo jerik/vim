@@ -1,11 +1,13 @@
 "	VIM Konfiguration Datei
-"	J. Erik Heinz"
+"	jerik
+
 "	Villeicht interessant:
 "	http://cscope.sourceforge.net/cscope_vim_tutorial.html
+"	http://kien.github.io/ctrlp.vim/
 
-"	Kein piepen
 let mapleader = '-'
 
+"	Kein piepen
 set	noerrorbells
   
 "	Globale einstellungen für Tabstop und shiftwidth

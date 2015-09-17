@@ -124,7 +124,7 @@ iab atc 	@todo-changes
 iab tb		@thinkbox
 "iab atp		@todo :prototyp
 iab <expr> heu strftime("=%Y%m%d")
-iab <expr> tom strftime("%%%Y%m%d", localtime(  ) + ( 24*3600 ))
+"iab <expr> tom strftime("%%%Y%m%d", localtime(  ) + ( 24*3600 ))
 iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 
 " Add *unwanted* carriage return
