@@ -3,7 +3,9 @@
 
 "	Villeicht interessant:
 "	http://cscope.sourceforge.net/cscope_vim_tutorial.html
-"	http://kien.github.io/ctrlp.vim/
+"	http://kien.github.io/ctrlp.vim/ - tool for file searching
+"	https://github.com/rking/ag.vim/blob/master/README.md - tool for file
+"	searching
 
 let mapleader = '-'
 
