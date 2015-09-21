@@ -312,5 +312,15 @@ Beispielsweise paste des OS copy registers
 	<C-R>*
 
 
+Cursor magic										 *jk-cursor*
+-----------------------------------------------------------------------------
+Highlight cursor line
+
+	:set cul "switch on
+	:set cursorline 
+	:set nocul "switch off
+	:set nocursorline
+
+
 
   vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:
