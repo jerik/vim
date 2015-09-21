@@ -7,6 +7,7 @@
 "	https://github.com/rking/ag.vim/blob/master/README.md - tool for file searching
 "	https://github.com/osyo-manga/vim-over - see search and replaces before you execute
 "	http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
+"	Vim Scripting http://andrewscala.com/vimscript/, see as well pdf in .vim
 
 let mapleader = '-'
 
