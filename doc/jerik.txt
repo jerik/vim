@@ -141,6 +141,22 @@ Damit kann man mittels F9 live umschalten.
 	nmap <F9> :set ignorecase! ignorecase?<CR>
 
 
+Suchenpatter mit newline				  					*jk-search-newline*
+-----------------------------------------------------------------------------
+Patterns including end-of-lineEdit
+
+The search /^abc finds abc at the beginning of a line, and /abc$ finds abc at the end of a line. 
+However, in /abc^def and /abc$def the ^ and $ are just ordinary characters with no special meaning. 
+By contrast, each of the following has a special meaning anywhere in a search pattern.
+
+	\n 	a newline character (line ending)
+	\_s 	a whitespace (space or tab) or newline character
+	\_^ 	the beginning of a line (zero width)
+	\_$ 	the end of a line (zero width)
+	\_. 	any character including a newline 
+
+see: http://vim.wikia.com/wiki/Search_across_multiple_lines
+
 
 Suchen und löschen 						  					*jk-delete*
 -----------------------------------------------------------------------------
