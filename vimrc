@@ -116,9 +116,11 @@ set wrapmargin=1
 filetype plugin on
 
 "	Swapfiles nicht ins gleich verzeichnis schreiben, sondern in ein spezielles
-set dir=/usr/swps
-" For windows OS, missing switch
-"set dir=C:\swps
+if has( "win32" )
+	set dir=C:\swps
+else
+	set dir=/usr/swps
+endif
 
 
 "Viki settings:"
