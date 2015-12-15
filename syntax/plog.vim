@@ -21,6 +21,7 @@ syn match   embraced  	"\".*\"" contains=ip,time
 syn match   done   		"^.done.*"
 syn match   cancel   	"^.canceled.*"
 syn match   postponed  	"^.postponed.*"
+syn match   postponed  	"^.notmybusiness.*"
 syn match   todo   		"^.todo.*"
 syn match   back   		"^.back"
 syn match   vorschlag	"^.decision"
