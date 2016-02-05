@@ -135,6 +135,10 @@ iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 " http://aftnn.org/post/47880443079/strip-tags-in-a-vim-buffer
 :command! STag :%s/<\_.\{-1,\}>//g  
 
+" format @Todo to @todo
+" As iOS replace of ato is @Todo insteal of @todo
+:command! Ctodo :%s/^@Todo/@todo/g  
+
 " 	jerik 20141015
 " 	Show all tags in my journal. A tag is =tag =test =foobar
 :command! Tags /=\w\+
