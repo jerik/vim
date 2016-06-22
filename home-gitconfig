@@ -10,17 +10,21 @@
 [difftool]
 	prompt = false
 [alias]
+	# http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
 	d = difftool
 	co = checkout
 	br = branch
+	ad = add --all . 
 	ci = commit
 	cm = commit -am 
 	st = status
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	dl = "!git ll -1"
 	type = cat-file -t
 	dump = cat-file -p
 	alias = ! git config --get-regexp ^alias.
-	ad = add --all . 
 	morning = pull
 	mor = pull
 	day = pull

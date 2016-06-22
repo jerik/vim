@@ -2,4 +2,5 @@ neobundle.vim
 neocomplcache.vim
 unite.vim
 vim-airline
+vimproc
 vimshell.vim
