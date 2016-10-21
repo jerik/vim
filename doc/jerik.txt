@@ -286,6 +286,14 @@ Damit erhält man bei jedem foo eine Frage was damit zu tun ist: y(es), n(o)
 
 	%s/foo/bar/gc
 
+
+Regex 										 *jk-regex*
+-----------------------------------------------------------------------------
+Finde alles was von spitzen klammern umschlossen ist: 
+
+	/<\&.*>			# tags, emailadresse
+
+
 Register und Zugriff										 *jk-regsiter*
 -----------------------------------------------------------------------------
 Anzeigen was man alles in seinen Registern hat
