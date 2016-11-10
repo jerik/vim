@@ -294,6 +294,18 @@ Finde alles was von spitzen klammern umschlossen ist:
 	/<\&.*>			# tags, emailadresse
 
 
+Format Email 										 *jk-regex*
+-----------------------------------------------------------------------------
+Um text in ein 80 Spalte Email format zu bringen, d.h. lange Zeilen 
+umbrechen zu lassen, geht man wiefolgt vor: 
+
+	:set ft=mail
+	gggqG		# gg springe an Zeile 1; gq formatiere; G bis zum Ende
+
+Nur formatieren ist: 
+
+	gq
+
 Register und Zugriff										 *jk-regsiter*
 -----------------------------------------------------------------------------
 Anzeigen was man alles in seinen Registern hat
