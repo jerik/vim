@@ -294,7 +294,7 @@ Finde alles was von spitzen klammern umschlossen ist:
 	/<\&.*>			# tags, emailadresse
 
 
-Format Email 										 *jk-regex*
+Email formatieren										 *jk-email-format*
 -----------------------------------------------------------------------------
 Um text in ein 80 Spalte Email format zu bringen, d.h. lange Zeilen 
 umbrechen zu lassen, geht man wiefolgt vor: 
@@ -302,9 +302,19 @@ umbrechen zu lassen, geht man wiefolgt vor:
 	:set ft=mail
 	gggqG		# gg springe an Zeile 1; gq formatiere; G bis zum Ende
 
-Nur formatieren ist: 
+Nur formatieren ist: gq
 
-	gq
+
+Code formatieren 										 *jk-code-format*
+-----------------------------------------------------------------------------
+Um den quellcode richtig einzuruecken: 
+
+	:set ft=<codeart>  # bspw. javascript
+	gg=G	# Formatiert die gesamt datei
+	=%		# Formatiert eine Funktion wenn man auf den { ist
+
+Nur formatieren ist: =<Motion>
+
 
 Register und Zugriff										 *jk-regsiter*
 -----------------------------------------------------------------------------
