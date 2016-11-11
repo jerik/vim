@@ -316,6 +316,13 @@ Um den quellcode richtig einzuruecken:
 Nur formatieren ist: =<Motion>
 
 
+Syntax re-hightlight 								 *jk-syntax-re-highlight*
+-----------------------------------------------------------------------------
+Wenn das Syntax Highlight im Buffer verloren geht:
+
+	:syntax sync formstart
+
+
 Register und Zugriff										 *jk-regsiter*
 -----------------------------------------------------------------------------
 Anzeigen was man alles in seinen Registern hat
