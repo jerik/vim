@@ -9,19 +9,24 @@
 "	http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 "	Vim Scripting http://andrewscala.com/vimscript/, see as well pdf in .vim
 
+"	@todo Julian support
+"	http://www.lindonslog.com/linux-unix/send-lines-code-vim-r-julia-python-repl-slime/
+"	https://github.com/jpalardy/vim-slime
+"	https://github.com/JuliaEditorSupport/julia-vim
+
 let mapleader = '-'
 
 "	Kein piepen
 set	noerrorbells
   
-"	Globale einstellungen für Tabstop und shiftwidth
+"	Globale einstellungen fÃ¼r Tabstop und shiftwidth
 set	tabstop=4
 set sw=4
 
 "	Visuelles Klingeln anstat normales piepen
 set visualbell
 
-"	Automatisches einrücken 
+"	Automatisches einrÃ¼cken 
 set autoindent
  
 "	autowrite: Automatically save modifications to files
@@ -126,8 +131,8 @@ endif
 "Viki settings:"
 " this is in iso-latin-1
 " @todo Not sure if this still works...
-let g:vikiLowerCharacters = "a-zäöüßáàéèíìóòçñ"
-let g:vikiUpperCharacters = "A-ZÄÖÜ"
+let g:vikiLowerCharacters = "a-zÃ¤Ã¶Ã¼ÃŸÃ¡Ã Ã©Ã¨Ã­Ã¬Ã³Ã²Ã§Ã±"
+let g:vikiUpperCharacters = "A-ZÃ„Ã–Ãœ"
 
 "Add the Wiki suffix to an vikiword. means OtherIdea links to OtherIdea.txt"
 let g:vikiUseParentSuffix = 1
