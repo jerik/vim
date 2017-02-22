@@ -289,9 +289,10 @@ Damit erhält man bei jedem foo eine Frage was damit zu tun ist: y(es), n(o)
 
 Regex 										 *jk-regex*
 -----------------------------------------------------------------------------
-Finde alles was von spitzen klammern umschlossen ist: 
+Verschiedene hilfreiche regex
 
-	/<\&.*>			# tags, emailadresse
+	/<\&.*>			# findet alles was mit <> umschlossen ist: tags, emailadresse
+	/foo\(bar\)\@!	# findet nur foo, nicht foobar. Negation mit \@!
 
 
 Email formatieren										 *jk-email-format*

@@ -83,6 +83,9 @@ set showmatch
 "	showmode:    Show the current mode?  YEEEEEEEEESSSSSSSSSSS!
 set showmode
 
+" 2016-12-19 http://stackoverflow.com/questions/41186370/vim-displays-content-of-file-with-signs
+:set encoding=utf-8
+
 "	splitbelow:  Create new window below current one.
 set splitbelow
 "	
@@ -158,6 +161,10 @@ if &t_Co > 2 || has("gui_running")
  	syntax on
 	set hlsearch
 endif
+
+" 20170222 set font for graphical vim, to support EUR sign"
+" http://www.troubleshooters.com/linux/vifont.htm
+"set gfn=DejaVu_Sans_Mono:h11:cANSI @todo jerik should be a font that works on OSX/Linux
 
 " 	Projects notes mit neuer Syntax versehen
 au BufRead,BufNewFile *.log set filetype=plog 
