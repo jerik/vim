@@ -286,6 +286,44 @@ Damit erhält man bei jedem foo eine Frage was damit zu tun ist: y(es), n(o)
 
 	%s/foo/bar/gc
 
+
+Regex 										 *jk-regex*
+-----------------------------------------------------------------------------
+Verschiedene hilfreiche regex
+
+	/<\&.*>			# findet alles was mit <> umschlossen ist: tags, emailadresse
+	/foo\(bar\)\@!	# findet nur foo, nicht foobar. Negation mit \@!
+
+
+Email formatieren										 *jk-email-format*
+-----------------------------------------------------------------------------
+Um text in ein 80 Spalte Email format zu bringen, d.h. lange Zeilen 
+umbrechen zu lassen, geht man wiefolgt vor: 
+
+	:set ft=mail
+	gggqG		# gg springe an Zeile 1; gq formatiere; G bis zum Ende
+
+Nur formatieren ist: gq
+
+
+Code formatieren 										 *jk-code-format*
+-----------------------------------------------------------------------------
+Um den quellcode richtig einzuruecken: 
+
+	:set ft=<codeart>  # bspw. javascript
+	gg=G	# Formatiert die gesamt datei
+	=%		# Formatiert eine Funktion wenn man auf den { ist
+
+Nur formatieren ist: =<Motion>
+
+
+Syntax re-hightlight 								 *jk-syntax-re-highlight*
+-----------------------------------------------------------------------------
+Wenn das Syntax Highlight im Buffer verloren geht:
+
+	:syntax sync formstart
+
+
 Register und Zugriff										 *jk-regsiter*
 -----------------------------------------------------------------------------
 Anzeigen was man alles in seinen Registern hat

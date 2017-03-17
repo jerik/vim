@@ -437,3 +437,16 @@ function! ToDo( type )
 	:w
 endfunction
 "command! ToDo call ToDo("done")
+
+" Funktion von Nils, toggle damit im nowrap modus beim einfügen von Zeichen,
+" die Zeile nicht umbricht
+" http://deliberate-software.com/vim-refactoring-patterns/
+function! ToggleTextWrap()
+    if &fo =~ 't'
+        set fo-=t
+    else
+        set fo+=t
+    endif
+endfunction
+" F10: Highlight too long lines
+"map<F10> :call ToggleTextWrap()<CR>

@@ -8,20 +8,26 @@
 "	https://github.com/osyo-manga/vim-over - see search and replaces before you execute
 "	http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
 "	Vim Scripting http://andrewscala.com/vimscript/, see as well pdf in .vim
+"	http://web.stanford.edu/~ryanlee/posts/2015-07/vim
+
+"	@todo Julian support
+"	http://www.lindonslog.com/linux-unix/send-lines-code-vim-r-julia-python-repl-slime/
+"	https://github.com/jpalardy/vim-slime
+"	https://github.com/JuliaEditorSupport/julia-vim
 
 let mapleader = '-'
 
 "	Kein piepen
 set	noerrorbells
   
-"	Globale einstellungen für Tabstop und shiftwidth
+"	Globale einstellungen fÃ¼r Tabstop und shiftwidth
 set	tabstop=4
 set sw=4
 
 "	Visuelles Klingeln anstat normales piepen
 set visualbell
 
-"	Automatisches einrücken 
+"	Automatisches einrÃ¼cken 
 set autoindent
  
 "	autowrite: Automatically save modifications to files
@@ -83,6 +89,9 @@ set showmatch
 "	showmode:    Show the current mode?  YEEEEEEEEESSSSSSSSSSS!
 set showmode
 
+" 2016-12-19 http://stackoverflow.com/questions/41186370/vim-displays-content-of-file-with-signs
+:set encoding=utf-8
+
 "	splitbelow:  Create new window below current one.
 set splitbelow
 "	
@@ -126,8 +135,8 @@ endif
 "Viki settings:"
 " this is in iso-latin-1
 " @todo Not sure if this still works...
-let g:vikiLowerCharacters = "a-zäöüßáàéèíìóòçñ"
-let g:vikiUpperCharacters = "A-ZÄÖÜ"
+let g:vikiLowerCharacters = "a-zÃ¤Ã¶Ã¼ÃŸÃ¡Ã Ã©Ã¨Ã­Ã¬Ã³Ã²Ã§Ã±"
+let g:vikiUpperCharacters = "A-ZÃ„Ã–Ãœ"
 
 "Add the Wiki suffix to an vikiword. means OtherIdea links to OtherIdea.txt"
 let g:vikiUseParentSuffix = 1
@@ -158,6 +167,10 @@ if &t_Co > 2 || has("gui_running")
  	syntax on
 	set hlsearch
 endif
+
+" 20170222 set font for graphical vim, to support EUR sign"
+" http://www.troubleshooters.com/linux/vifont.htm
+"set gfn=DejaVu_Sans_Mono:h11:cANSI @todo jerik should be a font that works on OSX/Linux
 
 " 	Projects notes mit neuer Syntax versehen
 au BufRead,BufNewFile *.log set filetype=plog 
