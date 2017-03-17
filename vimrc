@@ -119,7 +119,7 @@ filetype plugin on
 if has( "win32" )
 	set dir=C:\swps
 else
-	set dir=/usr/swps
+	set dir=/usr/local/swps
 endif
 
 

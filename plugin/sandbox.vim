@@ -28,3 +28,4 @@ endfunction
 function! Tfoo( foo )
 	echom a:foo
 endfunction
+
