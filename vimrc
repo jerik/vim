@@ -203,6 +203,19 @@ command! Rehash call Rehash()
 
 filetype plugin indent on     " Required!
 
+" https://github.com/junegunn/vim-plug/wiki/faq
+" @todo Better Javascript: " https://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
+" @todo vimfiles should be a variable which is .vim or vimfiles, based on the OS
+call plug#begin('~/vimfiles/plugged')
+""Plug 'junegunn/seoul256.vim'
+""Plug 'junegunn/goyo.vim'
+""Plug 'junegunn/limelight.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'Raimondi/delimitMate'
+Plug 'pangloss/vim-javascript'
+Plug 'nathanaelkane/vim-indent-guides'
+call plug#end()
+
 " 20170405 Removed neobundle"
 " jerik 20131128 
 " Unite configuration 
