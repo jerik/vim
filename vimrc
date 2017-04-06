@@ -201,42 +201,45 @@ function! Rehash()
 endfunction
 command! Rehash call Rehash()
 
+filetype plugin indent on     " Required!
+
+" 20170405 Removed neobundle"
 " jerik 20131128 
 " Unite configuration 
 ""nnoremap f :Unite -start-insert file_rec<CR>
-nnoremap <Leader>f :Unite file_rec<CR>
+""nnoremap <Leader>f :Unite file_rec<CR>
 "nnoremap b :Unite buffer<CR> " cannot use b as move commend!
 
 " neocomplcache
-let g:neocomplcache_enable_at_startup = 1
+""let g:neocomplcache_enable_at_startup = 1
 
 
 
 " Neobundle: https://github.com/Shougo/neobundle.vim
-if has('vim_starting')
-  set nocompatible               " Be iMproved
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+""if has('vim_starting')
+""  set nocompatible               " Be iMproved
+""  set runtimepath+=~/.vim/bundle/neobundle.vim/
+""endif
 
 " vim-airline
 " Needs the powerline fonts, installed. Does not work out of the box
 "let g:airline_powerline_fonts = 1
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+""call neobundle#rc(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+""NeoBundleFetch 'Shougo/neobundle.vim'
 " Recommended to install
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
 " NeoBundle 'Shougo/vimproc'
 " as from https://github.com/Shougo/vimproc.vim
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
+""NeoBundle 'Shougo/vimproc', {
+""      \ 'build' : {
+""      \     'windows' : 'make -f make_mingw32.mak',
+""      \     'mac' : 'make -f make_mac.mak',
+""      \     'unix' : 'make -f make_unix.mak',
+""      \    },
+""      \ }
 
 
 " Run :Neobundleinstall!
@@ -244,10 +247,10 @@ NeoBundle 'Shougo/vimproc', {
 " info file
 " My Bundles here:
 "
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'bling/vim-airline'
+""NeoBundle 'Shougo/vimshell.vim'
+""NeoBundle 'Shougo/unite.vim'
+""NeoBundle 'Shougo/neocomplcache.vim'
+""NeoBundle 'bling/vim-airline'
 
 " Note: You don't set neobundle setting in .gvimrc!
 " Original repos on github
@@ -269,7 +272,6 @@ NeoBundle 'bling/vim-airline'
 " NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
 
 
-filetype plugin indent on     " Required!
 "
 " Brief help
 " :NeoBundleList          - list configured bundles
@@ -277,4 +279,4 @@ filetype plugin indent on     " Required!
 " :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 " Installation check.
-NeoBundleCheck
+""NeoBundleCheck
