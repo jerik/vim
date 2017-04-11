@@ -16,6 +16,9 @@
 "	https://github.com/JuliaEditorSupport/julia-vim
 
 let mapleader = '-'
+" 2017-04-08 test for vim-pipe
+" http://learnvimscriptthehardway.stevelosh.com/chapters/06.html
+let localleader = ','
 
 "	Kein piepen
 set	noerrorbells
@@ -201,6 +204,9 @@ function! Rehash()
 endfunction
 command! Rehash call Rehash()
 
+" @todo better colorschema:
+" http://ethanschoonover.com/solarized/vim-colors-solarized
+
 " jerik 20131128 
 " Unite configuration 
 ""nnoremap f :Unite -start-insert file_rec<CR>
@@ -248,6 +254,7 @@ NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'bling/vim-airline'
+NeoBundle 'krisajenkins/vim-pipe' 
 
 " Note: You don't set neobundle setting in .gvimrc!
 " Original repos on github
