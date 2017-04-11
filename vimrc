@@ -173,7 +173,9 @@ endif
 
 " 20170222 set font for graphical vim, to support EUR sign"
 " http://www.troubleshooters.com/linux/vifont.htm
-"set gfn=DejaVu_Sans_Mono:h11:cANSI @todo jerik should be a font that works on OSX/Linux
+" set gfn=DejaVu_Sans_Mono:h11:cANSI @todo jerik should be a font that works on OSX/Linux
+" Font names must be without whitespace: s/ /_/g
+set guifont=Meslo_LG_M_Regular_for_Powerline:h12
 
 " 	Projects notes mit neuer Syntax versehen
 au BufRead,BufNewFile *.log set filetype=plog 
@@ -226,7 +228,8 @@ endif
 
 " vim-airline
 " Needs the powerline fonts, installed. Does not work out of the box
-"let g:airline_powerline_fonts = 1
+" https://github.com/powerline/fonts
+let g:airline_powerline_fonts = 1
 
 call neobundle#rc(expand('~/.vim/bundle/'))
 
