@@ -18,7 +18,7 @@
 let mapleader = '-'
 " 2017-04-08 test for vim-pipe
 " http://learnvimscriptthehardway.stevelosh.com/chapters/06.html
-let localleader = ','
+let maplocalleader = ','
 
 "	Kein piepen
 set	noerrorbells
@@ -205,6 +205,10 @@ function! Rehash()
 	echom "Reloaded tweak.vim, sandbox.vim"
 endfunction
 command! Rehash call Rehash()
+
+" installed pathogene"
+" https://github.com/tpope/vim-pathogen/
+execute pathogen#infect()
 
 " @todo better colorschema:
 " http://ethanschoonover.com/solarized/vim-colors-solarized
