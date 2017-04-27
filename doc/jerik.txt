@@ -360,5 +360,13 @@ Highlight cursor line
 	:set nocursorline
 
 
+Open Url										 *jk-open-url*
+-----------------------------------------------------------------------------
+Mit dem cursor auf einem URL sein und dann
+	
+	gx
+
+eingeben. Daraufhin wird die URL im Standardbrowser aufgerufen
+
 
   vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:
