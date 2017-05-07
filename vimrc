@@ -14,6 +14,7 @@
 "	http://www.lindonslog.com/linux-unix/send-lines-code-vim-r-julia-python-repl-slime/
 "	https://github.com/jpalardy/vim-slime
 "	https://github.com/JuliaEditorSupport/julia-vim
+"	https://github.com/tpope/vim-commentary
 
 let mapleader = '-'
 " 2017-04-08 test for vim-pipe
@@ -206,6 +207,12 @@ function! Rehash()
 endfunction
 command! Rehash call Rehash()
 
+" 20170507 load on journal.log <C-j> for searching after @todo
+" Will not work as .vim/plugin/run.vim is executed, to avoid this I have to 
+" configure the plugin manager to do that. so run.vim has to be a plugin...
+" perhaps this is covered by vim-pipe, so I do not need run.vim anymore
+autocmd FileType log map <buffer> <C-j> /@todo
+
 " installed pathogene"
 " https://github.com/tpope/vim-pathogen/
 execute pathogen#infect()
@@ -262,6 +269,15 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'krisajenkins/vim-pipe' 
+
+" https://github.com/garbas/vim-snipmate
+
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'tomtom/tlib_vim'
+NeoBundle 'garbas/vim-snipmate'
+
+" Optional:
+NeoBundle 'honza/vim-snippets'
 
 " Note: You don't set neobundle setting in .gvimrc!
 " Original repos on github

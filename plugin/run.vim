@@ -5,8 +5,14 @@
 " a) detected by the filetype 
 " b) the filetyp is associated with a interpreter
 "
+" 20170507 @todo: kollidates with vim-pipe
+"
 " All output of the script will be redirected to /tmp/vim.debug
 " Execute the current script file
+
+" 20170507 does not work to check for allowed filetype and do the stauff
+" If none of the allowed filetype exists, the plugin will not be loaded
+" This is as well the case if later a know filetype is edited with vim
 
 "@TODO: 
 "	allow range, for just run partial code
