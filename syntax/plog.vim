@@ -27,6 +27,9 @@ syn match   back   		"^.back"
 syn match   vorschlag	"^.decision"
 ""syn match   url     	"http:.*"
 ""syn match   urls     	"https:.*"
+syn match   errorlver   "^!!.*"
+syn match   cancel   	"^??.*"
+syn match   postponed  	"^::.*"
 
 ""syn match   embraced  "\[[^\]]*\]" contains=ip,time
 syn match   errorlv   "\[error\]\|\[warn\]\|\[notice\]"
