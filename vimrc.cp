@@ -1,37 +1,22 @@
 "	VIM Konfiguration Datei
-"	jerik
-
+"	J. Erik Heinz"
 "	Villeicht interessant:
 "	http://cscope.sourceforge.net/cscope_vim_tutorial.html
-"	http://kien.github.io/ctrlp.vim/ - tool for file searching
-"	https://github.com/rking/ag.vim/blob/master/README.md - tool for file searching
-"	https://github.com/osyo-manga/vim-over - see search and replaces before you execute
-"	http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
-"	Vim Scripting http://andrewscala.com/vimscript/, see as well pdf in .vim
-"	http://web.stanford.edu/~ryanlee/posts/2015-07/vim
-
-"	@todo Julian support
-"	http://www.lindonslog.com/linux-unix/send-lines-code-vim-r-julia-python-repl-slime/
-"	https://github.com/jpalardy/vim-slime
-"	https://github.com/JuliaEditorSupport/julia-vim
-"	https://github.com/tpope/vim-commentary
 
 let mapleader = '-'
-" 2017-04-08 test for vim-pipe
 " http://learnvimscriptthehardway.stevelosh.com/chapters/06.html
 let maplocalleader = ','
 
-"	Kein piepen
 set	noerrorbells
   
-"	Globale einstellungen fÃ¼r Tabstop und shiftwidth
+"	Globale einstellungen für Tabstop und shiftwidth
 set	tabstop=4
 set sw=4
 
 "	Visuelles Klingeln anstat normales piepen
 set visualbell
 
-"	Automatisches einrÃ¼cken 
+"	Automatisches einrücken 
 set autoindent
  
 "	autowrite: Automatically save modifications to files
@@ -93,9 +78,11 @@ set showmatch
 "	showmode:    Show the current mode?  YEEEEEEEEESSSSSSSSSSS!
 set showmode
 
+" 2016-11-02 http://unix.stackexchange.com/questions/23389/how-can-i-set-vims-default-encoding-to-utf-8
+"set fileencoding=utf-8
+
 " 2016-12-19 http://stackoverflow.com/questions/41186370/vim-displays-content-of-file-with-signs
 :set encoding=utf-8
-
 "	splitbelow:  Create new window below current one.
 set splitbelow
 "	
@@ -107,7 +94,6 @@ set splitbelow
 "	set   statusline=[%n]\ %f\ %(\ %M%R%H)%)
 "	set   statusline=[%n]\ %f\ %(\ %M%R%H)%)\=Pos=<%l\,%c%V>\ %P\=ASCII=%b\ HEX=%B)%=(c)\ Michael\ Prokop
 "	Meine favorisierte statusline:
-"	is now overrule by air-line
 set statusline=%<[%n]\%f\%y\%r\%1*%m%*%w%=%(Spalte:\%c%V%)%4(%)%-10(Zeile:\%l%)\%4(%)%p%%\%P\ \ \ \ ASCII=%b\ HEX=%B\ \ \ \ \ [jerik]
 
 "	ttyscroll:      turn off scrolling -> faster!
@@ -132,15 +118,14 @@ filetype plugin on
 if has( "win32" )
 	set dir=C:\swps
 else
-	set dir=/usr/local/swps
+	set dir=/usr/swps
 endif
 
 
 "Viki settings:"
 " this is in iso-latin-1
-" @todo Not sure if this still works...
-let g:vikiLowerCharacters = "a-zÃ¤Ã¶Ã¼ÃŸÃ¡Ã Ã©Ã¨Ã­Ã¬Ã³Ã²Ã§Ã±"
-let g:vikiUpperCharacters = "A-ZÃ„Ã–Ãœ"
+let g:vikiLowerCharacters = "a-zäöüßáàéèíìóòçñ"
+let g:vikiUpperCharacters = "A-ZÄÖÜ"
 
 "Add the Wiki suffix to an vikiword. means OtherIdea links to OtherIdea.txt"
 let g:vikiUseParentSuffix = 1
@@ -174,9 +159,7 @@ endif
 
 " 20170222 set font for graphical vim, to support EUR sign"
 " http://www.troubleshooters.com/linux/vifont.htm
-" set gfn=DejaVu_Sans_Mono:h11:cANSI @todo jerik should be a font that works on OSX/Linux
-" Font names must be without whitespace: s/ /_/g
-set guifont=Meslo_LG_M_Regular_for_Powerline:h12
+set gfn=DejaVu_Sans_Mono:h11:cANSI
 
 " 	Projects notes mit neuer Syntax versehen
 au BufRead,BufNewFile *.log set filetype=plog 
@@ -199,112 +182,35 @@ au BufRead,BufNewFile *.log set filetype=plog
 "	@todo Do I need the tweak.vim or merge into .vimrc?
 "	Rehash: Reload my vim configuration files"
 function! Rehash()
-	":so $HOME/vimfiles/plugin/tweak.vim
-	":so $HOME/vimfiles/plugin/sandbox.vim
-    exec ":so " . MyVimFolder() . "/plugin/tweak.vim"
-    exec ":so " . MyVimFolder() . "/plugin/sandbox.vim"
+	:so $HOME/vimfiles/plugin/tweak.vim
+	:so $HOME/vimfiles/plugin/sandbox.vim
 	echom "Reloaded tweak.vim, sandbox.vim"
 endfunction
-command! Rehash call Rehash()
-
-" 20170507 load on journal.log <C-j> for searching after @todo
-" Will not work as .vim/plugin/run.vim is executed, to avoid this I have to 
-" configure the plugin manager to do that. so run.vim has to be a plugin...
-" perhaps this is covered by vim-pipe, so I do not need run.vim anymore
-autocmd FileType log map <buffer> <C-j> /@todo
-
-" installed pathogene"
-" https://github.com/tpope/vim-pathogen/
-execute pathogen#infect()
-
-" @todo better colorschema:
-" http://ethanschoonover.com/solarized/vim-colors-solarized
-
-" jerik 20131128 
-" Unite configuration 
-""nnoremap f :Unite -start-insert file_rec<CR>
-nnoremap <Leader>f :Unite file_rec<CR>
-"nnoremap b :Unite buffer<CR> " cannot use b as move commend!
-
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-
-
-
-" Neobundle: https://github.com/Shougo/neobundle.vim
-if has('vim_starting')
-  set nocompatible               " Be iMproved
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-" vim-airline
-" Needs the powerline fonts, installed. Does not work out of the box
-" https://github.com/powerline/fonts
-let g:airline_powerline_fonts = 1
-
-call neobundle#rc(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
-" Recommended to install
-" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
-" NeoBundle 'Shougo/vimproc'
-" as from https://github.com/Shougo/vimproc.vim
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-
-" Run :Neobundleinstall!
-" after that I chanaged to ~/vim did a git status and openen the neobundle
-" info file
-" My Bundles here:
-"
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache.vim'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'krisajenkins/vim-pipe' 
-
-" https://github.com/garbas/vim-snipmate
-
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'garbas/vim-snipmate'
-
-" Optional:
-NeoBundle 'honza/vim-snippets'
-
-" Note: You don't set neobundle setting in .gvimrc!
-" Original repos on github
-" NeoBundle 'tpope/vim-fugitive'
-" NeoBundle 'Lokaltog/vim-easymotion', '09c0cea8'   " This plugin is locked at revision 09c0cea8 
-" NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-" vim-scripts repos
-"NeoBundle 'L9'
-"NeoBundle 'FuzzyFinder'
-"NeoBundle 'rails.vim'
-" Non github repos
-" NeoBundle 'git://git.wincent.com/command-t.git'
-" gist repos
-" NeoBundle 'gist:Shougo/656148', {
-"      \ 'name': 'everything.vim',
-"      \ 'script_type': 'plugin'}
-" Non git repos
-" NeoBundle 'http://svn.macports.org/repository/macports/contrib/mpvim/'
-" NeoBundle 'https://bitbucket.org/ns9tks/vim-fuzzyfinder'
-
+command! Rehash :call Rehash()
 
 filetype plugin indent on     " Required!
-"
-" Brief help
-" :NeoBundleList          - list configured bundles
-" :NeoBundleInstall(!)    - install(update) bundles
-" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
-" Installation check.
-NeoBundleCheck
+" https://github.com/junegunn/vim-plug/wiki/faq
+" @todo Better Javascript: " https://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
+" @todo vimfiles should be a variable which is .vim or vimfiles, based on the OS
+call plug#begin('~/vimfiles/plugged')
+""Plug 'junegunn/seoul256.vim'
+""Plug 'junegunn/goyo.vim'
+""Plug 'junegunn/limelight.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'Raimondi/delimitMate'
+Plug 'pangloss/vim-javascript'
+Plug 'nathanaelkane/vim-indent-guides'
+
+Plug 'krisajenkins/vim-pipe'
+
+" https://github.com/garbas/vim-snipmate
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+
+" Optional:
+Plug 'honza/vim-snippets'
+call plug#end()
+
+" to install plugins, reload .vimrc and run PlugInstall in normal mode

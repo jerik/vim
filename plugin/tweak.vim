@@ -47,7 +47,6 @@ nmap <M-v> f"a
 
 " jerik 20150213 get easy access to tweak and sandbox
 function! MyVimFiles( command )
-	"
 	"default is tweak.vim
 	let s:file = "/plugin/tweak.vim"
 
@@ -70,6 +69,13 @@ function! MyVimFolder(  )
 	endif 
 	return "$HOME/" . s:vimfolder
 endfunction
+
+" jerik 20160218 
+" Just call Normtodo to do normalize to @todo
+function! NormalizeTodo(  )
+	:%s/@Todo/@todo/g
+endfunction
+command! Normtodo call NormalizeTodo(  )
 
 
 " Perhaps switch for OS needed, as vimfiles is in *nix .vim "
