@@ -201,11 +201,14 @@ nmap ,l <ESC>:Log<CR>
 function! NewTodos() 
 	" :let tempfile = tempname()
 	:let tempfile = "~/AppData/Local/Temp/Journal-VIC537C.tmp"
-	:echo tempfile
+	"":echo tempfile
 	:exe 'e ' . tempfile
+	" delete all existing lines, see
+	" https://alvinalexander.com/linux-unix/vi-vim-delete-all-lines-how
+	:1,$d
 	:r ~\workspace\logs\Journal.log
-	:v/^@todo/d
-	" reverse list
+	:silent v/^@todo/d
+	" reverse list, does not work correctly
 	:g/^/m0		
 	:w
 	:syn match String "^@todo"
