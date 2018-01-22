@@ -164,6 +164,8 @@ nmap ,o <ESC>:call ToDo( "todo" )<CR>
 nmap ,c <ESC>:call ToDo( "cancel" )<CR>
 nmap ,p <ESC>:call ToDo( "postponed" )<CR>
 nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
+" move = delegated
+nmap ,m <ESC>:call ToDo( "delegated" )<CR>
 "
 "nmap ,d <ESC>:Tododone<CR>:w<CR>
 "nmap ,o <ESC>:Todotodo<CR>:w<CR>
@@ -173,7 +175,7 @@ nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
 "nmap ,w <ESC>:s/@todo.\{-} /@todo-wait /<CR>:w<CR>
 "nmap ,c <ESC>:s/@todo.\{-} /@canceled /<CR>:w<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
-nmap ,t <ESC>:Todos<CR>:w<CR>
+nmap ,t <ESC>:call NewTodos()<CR>
 nmap ,l <ESC>:Log<CR>
 
 
@@ -194,10 +196,26 @@ nmap ,l <ESC>:Log<CR>
 :command! Notes :e ..\log\project_notes.log
 :command! Com :e ..\plan\communication.plan
 
+" call with arguments next, wait, 
+" bugfix: command should work
+function! NewTodos() 
+	" :let tempfile = tempname()
+	:let tempfile = "~/AppData/Local/Temp/Journal-VIC537C.tmp"
+	:echo tempfile
+	:exe 'e ' . tempfile
+	:r ~\workspace\logs\Journal.log
+	:v/^@todo/d
+	" reverse list
+	:g/^/m0		
+	:w
+	:syn match String "^@todo"
+endfunction 
+
+
 " make some enhancements"
 if has('ruby')
 
-function! Todos()
+function! TodosOld()
 	"":exe 'e ' . tempname()
 	:exe 'e $HOME/todos.tmp'
 	:normal ggVGd
@@ -293,7 +311,8 @@ EOF
 	:exe 'w!' 
 endfunction 
 
-command! Todos :call Todos()
+"command! Todos :call Todos()
+command! Todos :call NewTodos()
 
 function! Finished(type)
 " type = done | open | canceled | todo-wait | todo
@@ -428,6 +447,8 @@ function! ToDo( type )
 		:s/@todo\%(-\w\+\)* /@todo-next / 
 	elseif a:type == "notmybusiness"
 		:s/@todo\%(-\w\+\)* /@notmybusiness / 
+	elseif a:type == "delegated"
+		:s/@todo\%(-\w\+\)* /@delegated / 
 	endif
 	:w
 endfunction
