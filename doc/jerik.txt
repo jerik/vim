@@ -359,6 +359,13 @@ Highlight cursor line
 	:set nocul "switch off
 	:set nocursorline
 
+Generate numbers										 *jk-numbers*
+-----------------------------------------------------------------------------
+Eine Reihe von Nummern erzeugen
+
+	:put =range( 1,25 )
+
+Erzeugt eine pro Zeile einen Eintrag von 1 bis 25
 
 
   vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:
