@@ -19,6 +19,7 @@ syn case ignore
 syn match	pcom	  	"\#.*"
 syn match   embraced  	"\".*\"" contains=ip,time
 syn match   done   		"^.done.*"
+syn match   done  		"^.past.*"
 syn match   cancel   	"^.canceled.*"
 syn match   postponed  	"^.postponed.*"
 syn match   postponed  	"^.notmybusiness.*"

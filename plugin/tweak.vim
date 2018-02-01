@@ -167,7 +167,7 @@ nmap ,d <ESC>:call ToDo( "done" )<CR>
 nmap ,w <ESC>:call ToDo( "wait" )<CR>
 nmap ,o <ESC>:call ToDo( "todo" )<CR>
 nmap ,c <ESC>:call ToDo( "cancel" )<CR>
-nmap ,p <ESC>:call ToDo( "postponed" )<CR>
+nmap ,p <ESC>:call ToDo( "past" )<CR>
 nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
 "
 "nmap ,d <ESC>:Tododone<CR>:w<CR>
@@ -427,8 +427,8 @@ function! ToDo( type )
 		:s/@todo\%(-\w\+\)* /@todo / 
 	elseif a:type == "cancel"
 		:s/@todo\%(-\w\+\)* /@canceled / 
-	elseif a:type == "postponed"
-		:s/@todo\%(-\w\+\)* /@postponed / 
+	elseif a:type == "past"
+		:s/@todo\%(-\w\+\)* /@past / 
 	elseif a:type == "next"
 		:s/@todo\%(-\w\+\)* /@todo-next / 
 	elseif a:type == "notmybusiness"
