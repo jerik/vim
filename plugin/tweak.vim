@@ -166,6 +166,8 @@ nmap ,p <ESC>:call ToDo( "postponed" )<CR>
 nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
 " move = delegated
 nmap ,m <ESC>:call ToDo( "delegated" )<CR>
+" alte vergangene Sachen die nicht gemacht wurden
+nmap ,a <ESC>:call ToDo( "past" )<CR> 
 "
 "nmap ,d <ESC>:Tododone<CR>:w<CR>
 "nmap ,o <ESC>:Todotodo<CR>:w<CR>
@@ -177,6 +179,9 @@ nmap ,m <ESC>:call ToDo( "delegated" )<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
 nmap ,t <ESC>:call NewTodos()<CR>
 nmap ,l <ESC>:Log<CR>
+
+" Filter the todo-next from the log files
+:command! Tn :call NextTodos()
 
 
 " Pfade sollte betriebssystem unahbängig sein. ruby funktion die dann den Pfad
@@ -213,6 +218,23 @@ function! NewTodos()
 	:w
 	:syn match String "^@todo"
 endfunction 
+
+function! NextTodos()
+	:let tempfile = "~/AppData/Local/Temp/Journal-VIC777C.tmp"
+	:exe 'e ' . tempfile
+	" delete all existing lines, see
+	" https://alvinalexander.com/linux-unix/vi-vim-delete-all-lines-how
+	:1,$d
+	:r ~\workspace\logs\Journal.log
+	:silent v/-next\|-wait\|-periodic/d
+	" reverse list, does not work correctly
+	:g/^/m0		
+	:sort
+	:w
+	:syn match String "-next"
+	:syn match Comment "-periodic"
+	:syn match Special "-wait"
+endfunction
 
 
 " make some enhancements"
@@ -452,6 +474,8 @@ function! ToDo( type )
 		:s/@todo\%(-\w\+\)* /@notmybusiness / 
 	elseif a:type == "delegated"
 		:s/@todo\%(-\w\+\)* /@delegated / 
+	elseif a:type == "past"
+		:s/@todo\%(-\w\+\)* /@past / 
 	endif
 	:w
 endfunction
