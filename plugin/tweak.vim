@@ -230,6 +230,11 @@ function! NextTodos()
 	" reverse list, does not work correctly
 	:g/^/m0		
 	:sort
+	:execute "normal gg"
+	" https://stackoverflow.com/a/21277670/1933185
+	:put =readfile(expand('~\workspace\logs\Journal.log'))[1:19]
+	" http://learnvimscriptthehardway.stevelosh.com/chapters/29.html
+	:execute "normal ggdd"
 	:w
 	:syn match String "-next"
 	:syn match Comment "-periodic"
