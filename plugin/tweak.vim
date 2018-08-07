@@ -178,7 +178,9 @@ nmap ,a <ESC>:call ToDo( "past" )<CR>
 "nmap ,c <ESC>:s/@todo.\{-} /@canceled /<CR>:w<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
 nmap ,t <ESC>:call NewTodos()<CR>
+nmap ,u <ESC>:call NextTodos()<CR>
 nmap ,l <ESC>:Log<CR>
+nmap ,f <ESC>:call FindCurrentLine()<CR>
 
 " Filter the todo-next from the log files
 :command! Tn :call NextTodos()
@@ -239,6 +241,12 @@ function! NextTodos()
 	:syn match String "-next"
 	:syn match Comment "-periodic"
 	:syn match Special "-wait"
+endfunction
+
+function! FindCurrentLine()
+	:let line = getline('.')
+	:e ~\workspace\logs\Journal.log
+	:exe '/' . line
 endfunction
 
 
