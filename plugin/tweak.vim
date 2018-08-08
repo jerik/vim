@@ -227,7 +227,7 @@ function! NextTodos()
 	" delete all existing lines, see
 	" https://alvinalexander.com/linux-unix/vi-vim-delete-all-lines-how
 	:1,$d
-	:r ~\workspace\logs\Journal.log
+	:silent r ~\workspace\logs\Journal.log
 	:silent v/-next\|-wait\|-periodic/d
 	" reverse list, does not work correctly
 	:g/^/m0		
