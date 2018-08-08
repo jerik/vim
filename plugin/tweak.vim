@@ -245,8 +245,13 @@ endfunction
 
 function! FindCurrentLine()
 	:let line = getline('.')
+	" try to get rid of / in the line, as this causes problems when finding
+	" the line in the journal
+	" This is done, becauase I set the search register manually
+	" http://vim.wikia.com/wiki/Searching_for_expressions_which_include_slashes
+	let @/ = line
 	:e ~\workspace\logs\Journal.log
-	:exe '/' . line
+	:normal n
 endfunction
 
 
