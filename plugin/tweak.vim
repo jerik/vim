@@ -1,10 +1,10 @@
 " Boost programming in vim
 " 05.04.2017 perhaps obsolete with https://github.com/Raimondi/delimitMate
-"inoremap { {  }<LEFT><LEFT>
-"inoremap [ []<LEFT>
-"inoremap ( (  )<LEFT><LEFT>
-"inoremap " ""<LEFT>
-"inoremap ' ''<LEFT>
+inoremap { {  }<LEFT><LEFT>
+inoremap [ []<LEFT>
+inoremap ( (  )<LEFT><LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
 "inoremap \| \|\|<LEFT>
 
 " Toogle ignorecase on search
@@ -166,6 +166,7 @@ nmap ,p <ESC>:call ToDo( "postponed" )<CR>
 nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
 " move = delegated
 nmap ,m <ESC>:call ToDo( "delegated" )<CR>
+nmap ,a <ESC>:call ToDo( "past" )<CR>
 "
 "nmap ,d <ESC>:Tododone<CR>:w<CR>
 "nmap ,o <ESC>:Todotodo<CR>:w<CR>
@@ -177,6 +178,8 @@ nmap ,m <ESC>:call ToDo( "delegated" )<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
 nmap ,t <ESC>:call NewTodos()<CR>
 nmap ,l <ESC>:Log<CR>
+nmap ,u <ESC>:call NextTodos()<CR>
+nmap ,f <ESC>:call FindCurrentLine()<CR>
 
 
 " Pfade sollte betriebssystem unahbängig sein. ruby funktion die dann den Pfad
@@ -200,19 +203,68 @@ nmap ,l <ESC>:Log<CR>
 " bugfix: command should work
 function! NewTodos() 
 	" :let tempfile = tempname()
-	:let tempfile = "~/AppData/Local/Temp/Journal-VIC537C.tmp"
+	:let tempfile = "~/Library/Journal-VIC537C.tmp"
 	"":echo tempfile
 	:exe 'e ' . tempfile
 	" delete all existing lines, see
 	" https://alvinalexander.com/linux-unix/vi-vim-delete-all-lines-how
 	:1,$d
-	:r ~\workspace\logs\Journal.log
+	:r ~/Dropbox/Journal.txt
 	:silent v/^@todo/d
 	" reverse list, does not work correctly
 	:g/^/m0		
 	:w
 	:syn match String "^@todo"
 endfunction 
+
+:let tempfile = "~/Library/Journal-VIC777C.tmp"
+function! NextTodos()
+	:exe 'e ' . tempfile
+	" delete all existing lines, see
+	" https://alvinalexander.com/linux-unix/vi-vim-delete-all-lines-how
+	:1,$d
+	:silent r ~/Dropbox/Journal.txt
+	:silent v/^@todo/d
+	:silent v/-next\|-wait\|-periodic/d
+	" reverse list, does not work correctly
+	:g/^/m0		
+	:sort
+	:execute "normal gg"
+	" https://stackoverflow.com/a/21277670/1933185
+	" only needed on work journal, as there are the productivity rules
+	":put =readfile(expand('~/Dropbox/Journal.txt'))[1:19]
+	" http://learnvimscriptthehardway.stevelosh.com/chapters/29.html
+	:execute "normal ggdd"
+	:w
+	:set cursorline
+	:syn match String "-next"
+	:syn match Comment "-periodic"
+	:syn match Special "-wait"
+endfunction
+
+function! Nextv2Todos(  )
+	:r ! /Users/jerik/sbin/todo-wait.py
+	:g/^/m0		
+	:sort
+	:exe 'w! ' .tempfile
+	:set cursorline
+	:syn match String "-next"
+	:syn match Comment "-periodic"
+	:syn match Special "-wait"
+	:syn match Error "\[-\d*\]"
+	:syn match Comment "\[\d*\]"
+endfunction
+
+function! FindCurrentLine()
+	:let line = getline('.')
+	" try to get rid of / in the line, as this causes problems when finding
+	" the line in the journal
+	" This is done, becauase I set the search register manually
+	" http://vim.wikia.com/wiki/Searching_for_expressions_which_include_slashes
+	let @/ = line
+	:e ~/Dropbox/Journal.txt
+	:normal n
+endfunction
 
 
 " make some enhancements"
@@ -452,6 +504,8 @@ function! ToDo( type )
 		:s/@todo\%(-\w\+\)* /@notmybusiness / 
 	elseif a:type == "delegated"
 		:s/@todo\%(-\w\+\)* /@delegated / 
+	elseif a:type == "past"
+		:s/@todo\%(-\w\+\)* /@past / 
 	endif
 	:w
 endfunction
