@@ -1,10 +1,11 @@
 " Boost programming in vim
+" 05.04.2017 perhaps obsolete with https://github.com/Raimondi/delimitMate
 inoremap { {  }<LEFT><LEFT>
 inoremap [ []<LEFT>
 inoremap ( (  )<LEFT><LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
-inoremap \| \|\|<LEFT>
+"inoremap \| \|\|<LEFT>
 
 " Toogle ignorecase on search
 " http://stackoverflow.com/a/2317808/19335
@@ -47,6 +48,7 @@ nmap <M-v> f"a
 
 " jerik 20150213 get easy access to tweak and sandbox
 function! MyVimFiles( command )
+	"
 	"default is tweak.vim
 	let s:file = "/plugin/tweak.vim"
 
@@ -65,17 +67,10 @@ endfunction
 function! MyVimFolder(  )
 	let s:vimfolder = ".vim"
 	if has( "win32" )
-		let s:vimfolder = "vimfiles"
+		:let s:vimfolder = "vimfiles"
 	endif 
 	return "$HOME/" . s:vimfolder
 endfunction
-
-" jerik 20160218 
-" Just call Normtodo to do normalize to @todo
-function! NormalizeTodo(  )
-	:%s/@Todo/@todo/g
-endfunction
-command! Normtodo call NormalizeTodo(  )
 
 
 " Perhaps switch for OS needed, as vimfiles is in *nix .vim "
@@ -167,9 +162,12 @@ nmap ,d <ESC>:call ToDo( "done" )<CR>
 nmap ,w <ESC>:call ToDo( "wait" )<CR>
 nmap ,o <ESC>:call ToDo( "todo" )<CR>
 nmap ,c <ESC>:call ToDo( "cancel" )<CR>
-nmap ,p <ESC>:call ToDo( "past" )<CR>
+nmap ,p <ESC>:call ToDo( "postponed" )<CR>
 nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
-"
+" move = delegated
+nmap ,m <ESC>:call ToDo( "delegated" )<CR>
+" alte vergangene Sachen die nicht gemacht wurden
+nmap ,a <ESC>:call ToDo( "past" )<CR> 
 "nmap ,d <ESC>:Tododone<CR>:w<CR>
 "nmap ,o <ESC>:Todotodo<CR>:w<CR>
 "nmap ,c <ESC>:Todocancel<CR>:w<CR>
@@ -178,19 +176,14 @@ nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
 "nmap ,w <ESC>:s/@todo.\{-} /@todo-wait /<CR>:w<CR>
 "nmap ,c <ESC>:s/@todo.\{-} /@canceled /<CR>:w<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
-nmap ,t <ESC>:Todos<CR>:w<CR>
+nmap ,t <ESC>:call NewTodos()<CR>
 nmap ,l <ESC>:Log<CR>
+nmap ,u <ESC>:call NextTodos()<CR>
+nmap ,o <ESC>:call Nextv2Todos()<CR>
+nmap ,f <ESC>:call FindCurrentLine()<CR>
 
-
-" Pfade sollte betriebssystem unahbängig sein. ruby funktion die dann den Pfad
+" Pfade sollte betriebssystem unabhaengig sein. ruby funktion die dann den Pfad
 " zusammenbaut...
-:command! Mark Marketing
-:command! Marketing :e mitschriften/marketing.mkd
-:command! Zeug Zeugnis
-:command! Zeugnis :e mitschriften/zeugnisse.mkd
-:command! Kon Konzept
-:command! Konzept :e mitschriften/vilit-konzept.mkd
-:command! Log :e logs/project_notes.mkd
 
 " Not used
 :command! Issue :e ..\log\issue.log
@@ -199,216 +192,90 @@ nmap ,l <ESC>:Log<CR>
 :command! Notes :e ..\log\project_notes.log
 :command! Com :e ..\plan\communication.plan
 
-" make some enhancements"
-if has('ruby')
+" global variable, needs to be referenced with prefix g: in function
+:let tempfile = "~/Library/Journal-VIC777C.tmp"
+:let journal = "~/Dropbox/Journal.txt"
 
-function! Todos()
-	"":exe 'e ' . tempname()
-	:exe 'e $HOME/todos.tmp'
-	:normal ggVGd
-	:set ft=markdown
-	ruby << EOF
-	class Jerik
-		def initialize
-			@workspace = File.join( 'D:', 'Data.GFTUser', 'workspace' )
-			#@workspace = File.join( 'C:', 'Zurich' )
-		end
-
-		def todos
-			@todos = Hash.new
-			@todos[:past] = Array.new
-			@todos[:today] = Array.new
-			@todos[:next_action] = Array.new
-			@todos[:waiting_for] = Array.new
-			# @todos[:todos] = Array.new
-
-			# for file in dir_files( 'project_notes.mkd' ) do 
-			#	project_name = get_project_name( file )
-			#	f = File.open( file )
-  			#	f.grep(/@todo/).each do |line| 
-			#		if line.size > 11
-			#			@todos[:next_action].push( "''"+project_name+"'' " + line ) if /@todo-next/.match( line )
-			#			@todos[:waiting_for].push( "''"+project_name+"'' " + line ) if /@todo-wait/.match( line )
-			#		end
-			#	end
-			#	f.close
-			#end
-
-			project_name = :vilit
-			today = Time.now.strftime( '%%%Y%m%d' )
-			f = File.open( File.join( '', 'Users', 'jerik', 'repos', 'jerik', 'logs', 'project_notes.mkd' ) )
-			f.grep(/@todo/).each do |line| 
-				if line.size > 11
-					#@todos[:next_action].push( "''"+project_name+"'' " + line ) if /@todo-next/.match( line )
-					#@todos[:waiting_for].push( "''"+project_name+"'' " + line ) if /@todo-wait/.match( line )
-					@todos[:past].push( line ) if past( line )
-					@todos[:today].push( line ) if /#{ today }/.match( line )
-					@todos[:next_action].push( line ) if /@todo-next/.match( line )
-					@todos[:waiting_for].push( line ) if /@todo-wait/.match( line )
-					# @todos[:todos].push( line ) if /@todo*/.match( line )
-				end
-			end
-			f.close
-
-			@buffer = VIM::Buffer.current
-			vimputs( "# PAST ( Abgelaufen !! )" )
-			@todos[:past].each do |item| vimputs( item.chomp ) end
-			vimputs( "" )
-			vimputs( "# TODAY " + today + "( Should be finished today)" )
-			@todos[:today].each do |item| vimputs( item.chomp ) end
-			vimputs( "" )
-			vimputs( "# NEXT ACTIONS" )
-			@todos[:next_action].each do |item| vimputs( item.chomp ) end
-			vimputs( "" )
-			vimputs( "# WAITING FOR" )
-			@todos[:waiting_for].each do |item| vimputs( item.chomp ) end
-			vimputs( "" )
-			# vimputs( "# TODOS" )
-			# @todos[:todos].each do |item| vimputs( item.chomp ) end
-			vimputs( "" )
-		end
-
-		def past( line )
-			result = line.scan( /%([0-9]+)/ )
-			ret = false; 
-			if ( ! result.empty? )
-				result.each do |datum|
-					ret = true if ( datum[0].to_i < Time.now.strftime( '%Y%m%d' ).to_i ) 
-				end
-			end
-			return ret
-		end
-
-		def dir_files(type)
-			pattern = File.join( @workspace, '**', type )
-			Dir.glob(pattern)
-		end
-
-		def get_project_name(file) 
-			container = file.split("#{File::SEPARATOR}"); 
-			project_name = container[-3]
-		end
-
-		def vimputs(s)
-			@buffer.append(@buffer.count,s)
-		end
-	end
-	Jerik.new.todos
-EOF
-	:exe 'w!' 
-endfunction 
-
-command! Todos :call Todos()
-
-function! Finished(type)
-" type = done | open | canceled | todo-wait | todo
-	ruby << EOF
-	class Finished
-		def initialize
-			type = Vim.evaluate( 'a:type' )
-			@buffer = VIM::Buffer.current
-			line = @buffer.line
-			num = @buffer.line_number
-			@buffer.delete( num )
-
-			filename = @buffer.name 
-			@logfile = File.join( '', 'Users', 'jerik', 'repos', 'jerik', 'logs', 'project_notes.mkd' )
-
-			if @logfile == filename
-				#@buffer.append( ( num - 1 ), line.gsub( /@todo.*? /, "@#{ type }:#{ Time.now.strftime( '%Y%m%d' ) } " ))
-				#@buffer.append( ( num - 1 ), line.gsub( /@todo.*? /, "@#{ type }#{ Time.now.strftime( ':%Y%m%d' ) if type != "todo-wait" } " ))
-				@buffer.append( ( num - 1 ), line.gsub( /@todo.*? /, "@#{ type }#{ Time.now.strftime( ':%Y%m%d' ) if ! type.match(/todo/) } " ))
-			else
-				editLogLine( line, type )
-			end
-		end
-
-		def editLogLine( pattern, type )
-			require 'tempfile'
-			require 'fileutils'
-			path = @logfile
-			temp_file = Tempfile.new('foo')
-			begin
-			  File.open(path, 'r') do |file|
-				file.each_line do |line|
-					if /#{ pattern }/.match( line ) 
-						#temp_file.puts line.gsub( /@todo.*? /, "@#{ type }:#{ Time.now.strftime( '%Y%m%d' ) } " )
-						#temp_file.puts line.gsub( /@todo.*? /, "@#{ type }#{ Time.now.strftime( ':%Y%m%d' ) if type != "todo-wait"} " )
-						temp_file.puts line.gsub( /@todo.*? /, "@#{ type }#{ Time.now.strftime( ':%Y%m%d' ) if ! type.match( /todo/ ) } " )
-					else
-				  		temp_file.puts line
-					end
-				end
-			  end
-			  temp_file.rewind
-			  FileUtils.mv(temp_file.path, path)
-			ensure
-			  temp_file.close
-			  temp_file.unlink
-			end
-		end
-
-	end
-	Finished.new
-EOF
-endfunction 
-
-
-""command! -nargs=1 Todo :call Todo("<args>")  
-command! Todotodo :call Finished("todo")
-command! Tododone :call Finished("done")
-command! Todocancel :call Finished("canceled")
-command! Todocwait :call Finished("todo-wait")
-
-function! Search(type, pattern)
-	"":exe 'e ' . tempname()
-	:exe 'e $HOME/search.tmp'
-	:normal ggVGd
-	:set ft=markdown
-	ruby << EOF
-	class Search
-		def initialize
-			@done_file = File.join( '', 'Users', 'jerik', 'repos', 'jerik', 'logs', 'project_notes.mkd' ) 
-		end
-
-		def search
-			@search = Hash.new
-			@search[:search] = Array.new
-
-			type = Vim.evaluate( 'a:type' )
-			pattern = Vim.evaluate( 'a:pattern' )
-
-			f = File.open( @done_file ) 
-			f.grep(/#{ type }/).each do |line| 
-				if line.size > 11
-					@search[:search].push( line ) if /#{ pattern }/.match( line )
-				end
-			end
-			f.close
-
-			@buffer = VIM::Buffer.current
-			vimputs( "# #{ type.upcase }: SEARCH FOR " + pattern )
-			@search[:search].each do |item| vimputs( item.chomp ) end
-			vimputs( "" )
-		end
-
-		def vimputs(s)
-			@buffer.append(@buffer.count,s)
-		end
-	end
-	Search.new.search
-EOF
-	:exe 'w!'
-endfunction 
-
-""command! -nargs=1 Todo :call Todo("<args>")  
-command! -nargs=1 Tbox :call Search("@thinkbox","<args>")
-command! -nargs=1 Todo :call Search( "@todo", "<args>" )
-command! -nargs=1 Done :call Search( "@done", "<args>" )
-command! -nargs=1 Find :call Search( " ", "<args>" )
-
+if has( "win32" )
+	:let g:tempfile = "~/AppData/Local/Temp/Journal-VIC777C.tmp"
+	:let g:journal="~\workspace\logs\Journal.log"
 endif
 
+" call with arguments next, wait, 
+" bugfix: command should work
+function! NewTodos() 
+	" :let tempfile = tempname()
+	:echo g:tempfile
+	:exe 'e ' . g:tempfile
+	" delete all existing lines, see
+	" https://alvinalexander.com/linux-unix/vi-vim-delete-all-lines-how
+	:1,$d
+	"":r ~/Dropbox/Journal.txt
+	:exe 'r ' . g:journal
+	:silent v/^@todo/d
+	" reverse list, does not work correctly
+	:g/^/m0		
+	:w
+	:syn match String "^@todo"
+endfunction 
+
+function! NextTodos()
+	:exe 'e ' . g:tempfile
+	" delete all existing lines, see
+	" https://alvinalexander.com/linux-unix/vi-vim-delete-all-lines-how
+	:1,$d
+	:exe 'r ' . g:journal
+	":silent v/^@todo/d
+	:silent v/-next\|-wait\|-periodic/d
+	" reverse list, does not work correctly
+	:g/^/m0		
+	:sort
+	:execute "normal gg"
+	" https://stackoverflow.com/a/21277670/1933185
+	if has( "win32" )
+		" only needed on work journal, as there are the productivity rules
+		":put =readfile(expand('~/Dropbox/Journal.txt'))[1:19]
+		:put =readfile(expand(g:journal))[1:19]
+	endif
+	" http://learnvimscriptthehardway.stevelosh.com/chapters/29.html
+	:execute "normal ggdd"
+	:w
+	:set cursorline
+	:syn match String "-next"
+	:syn match Comment "-periodic"
+	:syn match Special "-wait"
+endfunction
+
+function! Nextv2Todos(  )
+	:exe 'e ' . g:tempfile
+	:1,$d
+	:silent r ! /Users/jerik/sbin/todo-wait.py
+	:g/^/m0		
+	:sort
+	:exe 'w! ' . g:tempfile
+	:set cursorline
+	:syn match String "-next"
+	:syn match Comment "-periodic"
+	:syn match Special "-wait"
+	:syn match Error "\[-\d*\]"
+	:syn match Comment "\[\d*\]"
+endfunction
+
+function! FindCurrentLine()
+	:let line = getline('.')
+	" try to get rid of / in the line, as this causes problems when finding
+	" the line in the journal
+	" This is done, because I set the search register manually
+	" http://vim.wikia.com/wiki/Searching_for_expressions_which_include_slashes
+	:let part = strpart( line, 30 )
+	""let @/ = line
+	" get only a part of the line to work with adjusted todo-waits
+	let @/ = part
+	:exe 'e ' . g:journal
+	:normal n
+endfunction
+
+""command! -nargs=1 Todo :call Todo("<args>")  
 
 "relpace @todo wit @done"
 function! ToDo( type )
@@ -427,12 +294,16 @@ function! ToDo( type )
 		:s/@todo\%(-\w\+\)* /@todo / 
 	elseif a:type == "cancel"
 		:s/@todo\%(-\w\+\)* /@canceled / 
-	elseif a:type == "past"
-		:s/@todo\%(-\w\+\)* /@past / 
+	elseif a:type == "postponed"
+		:s/@todo\%(-\w\+\)* /@postponed / 
 	elseif a:type == "next"
 		:s/@todo\%(-\w\+\)* /@todo-next / 
 	elseif a:type == "notmybusiness"
 		:s/@todo\%(-\w\+\)* /@notmybusiness / 
+	elseif a:type == "delegated"
+		:s/@todo\%(-\w\+\)* /@delegated / 
+	elseif a:type == "past"
+		:s/@todo\%(-\w\+\)* /@past / 
 	endif
 	:w
 endfunction
