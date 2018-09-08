@@ -179,6 +179,7 @@ nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
 nmap ,t <ESC>:call NewTodos()<CR>
 nmap ,l <ESC>:Log<CR>
 nmap ,u <ESC>:call NextTodos()<CR>
+nmap ,o <ESC>:call Nextv2Todos()<CR>
 nmap ,f <ESC>:call FindCurrentLine()<CR>
 
 
@@ -217,9 +218,10 @@ function! NewTodos()
 	:syn match String "^@todo"
 endfunction 
 
+" global variable, needs to be referenced with prefix g: in function
 :let tempfile = "~/Library/Journal-VIC777C.tmp"
 function! NextTodos()
-	:exe 'e ' . tempfile
+	:exe 'e ' . g:tempfile
 	" delete all existing lines, see
 	" https://alvinalexander.com/linux-unix/vi-vim-delete-all-lines-how
 	:1,$d
@@ -243,10 +245,12 @@ function! NextTodos()
 endfunction
 
 function! Nextv2Todos(  )
-	:r ! /Users/jerik/sbin/todo-wait.py
+	:exe 'e ' . g:tempfile
+	:1,$d
+	:silent r ! /Users/jerik/sbin/todo-wait.py
 	:g/^/m0		
 	:sort
-	:exe 'w! ' .tempfile
+	:exe 'w! ' . g:tempfile
 	:set cursorline
 	:syn match String "-next"
 	:syn match Comment "-periodic"
@@ -259,9 +263,11 @@ function! FindCurrentLine()
 	:let line = getline('.')
 	" try to get rid of / in the line, as this causes problems when finding
 	" the line in the journal
-	" This is done, becauase I set the search register manually
+	" This is done, because I set the search register manually
 	" http://vim.wikia.com/wiki/Searching_for_expressions_which_include_slashes
-	let @/ = line
+	:let part = strpart( line, 30 )
+	""let @/ = line
+	let @/ = part
 	:e ~/Dropbox/Journal.txt
 	:normal n
 endfunction
