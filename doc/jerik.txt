@@ -368,5 +368,21 @@ Mit dem cursor auf einem URL sein und dann
 
 eingeben. Daraufhin wird die URL im Standardbrowser aufgerufen
 
+Nummer vor Zeilen erzeugen								 *jk-gen-numbers*
+-----------------------------------------------------------------------------
+Wenn man eine Liste von Nummer vor Zeilen braucht, geht das wiefolgt, nachdem
+man die Zeilen markiert hat
+
+	:'<,'>s/^\S/\=printf("%d.\t", line(".") - line("'<") + 1)
+
+Will man nicht bei 1 Anfangen sondern bei 12, dann ersetzt man die +1 mit +12
+Quelle: http://vim.wikia.com/wiki/Insert_line_numbers
+
+Will man nur eine Liste erzeugen geht das mit 
+
+	:put =range(2,12)
+
+Quelle: http://vim.wikia.com/wiki/Making_a_list_of_numbers
+
 
   vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:
