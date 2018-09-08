@@ -127,6 +127,8 @@ filetype plugin on
 "	Swapfiles nicht ins gleich verzeichnis schreiben, sondern in ein spezielles
 if has( "win32" )
 	set dir=C:\swps
+elseif has("macunix")
+	set dir=/usr/local/swps
 else
 	set dir=/usr/swps
 endif
@@ -149,6 +151,7 @@ let g:vikiUseParentSuffix = 1
 
 " better colorschema"
 "color jerik
+colorscheme fruchtig
 
 " Fullscreen when opening vim # for winwos
 " http://unix.stackexchange.com/questions/40047/vim-script-check-running-platform
@@ -164,7 +167,7 @@ endif
 "	Switch syntax highlighting on, when the terminal has colors
 "	Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
- 	syntax on
+	syntax on
 	set hlsearch
 endif
 
@@ -195,8 +198,8 @@ au BufRead,BufNewFile *.log set filetype=plog
 function! Rehash()
 	":so $HOME/vimfiles/plugin/tweak.vim
 	":so $HOME/vimfiles/plugin/sandbox.vim
-    exec ":so " . MyVimFolder() . "/plugin/tweak.vim"
-    exec ":so " . MyVimFolder() . "/plugin/sandbox.vim"
+	exec ":so " . MyVimFolder() . "/plugin/tweak.vim"
+	exec ":so " . MyVimFolder() . "/plugin/sandbox.vim"
 	echom "Reloaded tweak.vim, sandbox.vim"
 endfunction
 command! Rehash call Rehash()
@@ -206,14 +209,21 @@ filetype plugin indent on     " Required!
 " https://github.com/junegunn/vim-plug/wiki/faq
 " @todo Better Javascript: " https://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " @todo vimfiles should be a variable which is .vim or vimfiles, based on the OS
-call plug#begin('~/vimfiles/plugged')
+" To install run :PlugInstall
+call plug#begin('~/.vim/plugged')
 ""Plug 'junegunn/seoul256.vim'
 ""Plug 'junegunn/goyo.vim'
 ""Plug 'junegunn/limelight.vim'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'Raimondi/delimitMate'
-Plug 'pangloss/vim-javascript'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'jelera/vim-javascript-syntax'
+"Plug 'Raimondi/delimitMate'
+"Plug 'pangloss/vim-javascript'
+"Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'https://github.com/garbas/vim-snipmate.git'
+Plug 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+Plug 'krisajenkins/vim-pipe'
 call plug#end()
 
 " 20170405 Removed neobundle"
