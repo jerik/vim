@@ -160,7 +160,8 @@ iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 " replaces no every variation of @todo*"
 nmap ,d <ESC>:call ToDo( "done" )<CR>
 nmap ,w <ESC>:call ToDo( "wait" )<CR>
-nmap ,o <ESC>:call ToDo( "todo" )<CR>
+" todo start. Vorher war es ,o aber das konkurriet mit Nextv2
+nmap ,s <ESC>:call ToDo( "todo" )<CR>
 nmap ,c <ESC>:call ToDo( "cancel" )<CR>
 nmap ,p <ESC>:call ToDo( "postponed" )<CR>
 nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
@@ -168,13 +169,8 @@ nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
 nmap ,m <ESC>:call ToDo( "delegated" )<CR>
 " alte vergangene Sachen die nicht gemacht wurden
 nmap ,a <ESC>:call ToDo( "past" )<CR> 
-"nmap ,d <ESC>:Tododone<CR>:w<CR>
-"nmap ,o <ESC>:Todotodo<CR>:w<CR>
-"nmap ,c <ESC>:Todocancel<CR>:w<CR>
 
 "nmap ,d <ESC>:s/@todo.\{-} /@done /<CR>:w<CR>
-"nmap ,w <ESC>:s/@todo.\{-} /@todo-wait /<CR>:w<CR>
-"nmap ,c <ESC>:s/@todo.\{-} /@canceled /<CR>:w<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
 nmap ,t <ESC>:call NewTodos()<CR>
 nmap ,l <ESC>:Log<CR>
