@@ -340,14 +340,21 @@ Folgenden interessate Register gibt es ( Auszug ):
 	"* aktueller OS copy register
 	". aktelles ausgeführter punkt-ding in vim
 
-Zugriff auf die Register erhält man mit 
+Zugriff auf die Register erhält man mit ( im insert mode )
 	<C-R>register
+
+wobei <C-R>p für das normale kopieren einfacher geht
 
 Beispielsweise paste der letzten suche
 	<C-R>/
 
 Beispielsweise paste des OS copy registers
 	<C-R>*
+
+Um in den last-line mode / command line mode zu pasten muss man 
+erst in diesen gehen. Um beispielweise den lezte yank im command line mode 
+zu nutzen: 
+	:<C-R>"
 
 
 Cursor magic										 *jk-cursor*
