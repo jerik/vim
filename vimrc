@@ -16,6 +16,7 @@
 "	https://github.com/JuliaEditorSupport/julia-vim
 
 let mapleader = '-'
+autocmd FileType py let b:vimpipe_command="py"
 
 "	Kein piepen
 set	noerrorbells
@@ -207,22 +208,20 @@ command! Rehash call Rehash()
 filetype plugin indent on     " Required!
 
 " https://github.com/junegunn/vim-plug/wiki/faq
-" @todo Better Javascript: " https://oli.me.uk/2013/06/29/equipping-vim-for-javascript/
 " @todo vimfiles should be a variable which is .vim or vimfiles, based on the OS
 " To install run :PlugInstall
+" To remove, update vimrc, :so vimrc, :PlugClean
 call plug#begin('~/.vim/plugged')
 ""Plug 'junegunn/seoul256.vim'
 ""Plug 'junegunn/goyo.vim'
 ""Plug 'junegunn/limelight.vim'
 "Plug 'jelera/vim-javascript-syntax'
 "Plug 'Raimondi/delimitMate'
-"Plug 'pangloss/vim-javascript'
-"Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'https://github.com/garbas/vim-snipmate.git'
 "Plug 'tomtom/tlib_vim' "# not sure for which use case it is
 "Plug 'MarcWeber/vim-addon-mw-utils' "# not sure for which use case it is
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
+"Plug 'garbas/vim-snipmate'
+"Plug 'honza/vim-snippets'
 Plug 'krisajenkins/vim-pipe'
 "Plug 'tpope/vim-fugitive'
 call plug#end()
