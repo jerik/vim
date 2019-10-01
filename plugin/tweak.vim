@@ -27,12 +27,6 @@ inoremap VV <C-r>+
 " TODO @todo should run only on a pyhton buffer ( with a python file )
 nmap <F5> :exec '!py' shellescape(@%, 1)<cr>
 
-"	Rechtschreibfehler automatisch verbessern
-"	See also:  http://www.igd.fhg.de/~zach/programs/acl/
-iab alos    also
-iab aslo    also
-iab sonder	sondern
-
 " 	hilfreiche Ersetzungen
 iab ydate <C-R>=strftime("%d.%m.%Y")<CR>
 iab isodate <C-R>=strftime("%Y-%m-%d")<CR>
@@ -106,6 +100,8 @@ imap <C-Tab> :bn<CR>
 " jerik 2009-02-10: Text in den zwischenspeicher kopieren, damit man diesen woanders mit strg + v einfügen kann
 " http://codecocktail.wordpress.com/2008/10/27/vim-copypaste/
 " normalerweise um eine zeile zu kopieren: "+dd
+" jerik 2019-10-01 Funktioniert das noch? Alt+m hat auf osx nicht die
+" beschriebene funktion
 nmap <M-d> "+dd
 
 "" jerik: Sobald ich mich im Vim mit dem Cursor bewege verschwinden alle search highligts

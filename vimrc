@@ -16,7 +16,6 @@
 "	https://github.com/JuliaEditorSupport/julia-vim
 
 let mapleader = '-'
-autocmd FileType py let b:vimpipe_command="py"
 
 "	Kein piepen
 set	noerrorbells
