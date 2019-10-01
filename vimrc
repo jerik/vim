@@ -134,17 +134,6 @@ else
 	set dir=/usr/swps
 endif
 
-
-"Viki settings:"
-" this is in iso-latin-1
-" @todo Not sure if this still works...
-let g:vikiLowerCharacters = "a-zäöüßáàéèíìóòçñ"
-let g:vikiUpperCharacters = "A-ZÄÖÜ"
-
-"Add the Wiki suffix to an vikiword. means OtherIdea links to OtherIdea.txt"
-let g:vikiUseParentSuffix = 1
-
-" 	jerik: 20141006 http://stackoverflow.com/a/680271/1933185
 " 	copy paste with system clipboard on Windows
 " set clipboard=unnamed
 " 	jerik: 20141020
@@ -222,8 +211,8 @@ call plug#begin('~/.vim/plugged')
 "Plug 'MarcWeber/vim-addon-mw-utils' "# not sure for which use case it is
 "Plug 'garbas/vim-snipmate'
 "Plug 'honza/vim-snippets'
-Plug 'krisajenkins/vim-pipe'
-"Plug 'tpope/vim-fugitive'
+"Plug 'krisajenkins/vim-pipe' "# 2019-10-01 not usefull for python"
+"Plug 'tpope/vim-fugitive' 
 call plug#end()
 
 " TODO @todo vim-airline # Needs the powerline fonts, installed. Does not work out of the box
