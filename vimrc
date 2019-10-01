@@ -211,6 +211,10 @@ call plug#begin('~/.vim/plugged')
 "Plug 'MarcWeber/vim-addon-mw-utils' "# not sure for which use case it is
 "Plug 'garbas/vim-snipmate'
 "Plug 'honza/vim-snippets'
+Plug 'kien/ctrlp.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'ervandew/supertab'
+Plug 'Townk/vim-autoclose'
 "Plug 'krisajenkins/vim-pipe' "# 2019-10-01 not usefull for python"
 ""Plug 'tpope/vim-fugitive'  "# 2019-10-01 not working, get errors, cannot execute :Git"
 call plug#end()

@@ -1,10 +1,10 @@
 " Boost programming in vim
 " 05.04.2017 perhaps obsolete with https://github.com/Raimondi/delimitMate
-inoremap { {  }<LEFT><LEFT>
-inoremap [ []<LEFT>
-inoremap ( (  )<LEFT><LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
+"inoremap { {  }<LEFT><LEFT>
+"inoremap [ []<LEFT>
+"inoremap ( (  )<LEFT><LEFT>
+"inoremap " ""<LEFT>
+"inoremap ' ''<LEFT>
 "inoremap \| \|\|<LEFT>
 
 " Toogle ignorecase on search
