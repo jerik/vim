@@ -224,7 +224,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'krisajenkins/vim-pipe'
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " 20170405 Removed neobundle"
