@@ -1,3 +1,0 @@
-#!/bin/ksh
-
-vim -c 'so $HOME/.vim/myscripts/myvimspell.vim' "$@"

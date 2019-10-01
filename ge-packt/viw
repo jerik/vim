@@ -1,3 +1,0 @@
-#!/bin/ksh
-
-vim -c "nmap <F1> gqap" -c "set comments=" "$@"

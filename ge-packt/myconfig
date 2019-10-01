@@ -1,9 +1,0 @@
-#!/bin/bash
-
-UNIX=yes
-SHELL=bash
-CFLAGS=-O3 LDFLAGS="-s -L/usr/lib/python2.2/config -lpthread" \
-	configure --with-features=big --enable-pythoninterp \
-	--with-python-config-dir=/usr/lib/python2.2/config \
-	--enable-tclinterp --enable-perlinterp --prefix=$HOME/tmp \
-	--exec-prefix=$HOME/tmp

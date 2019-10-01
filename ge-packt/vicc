@@ -1,3 +1,0 @@
-#!/bin/ksh
-
-vic -c "set ft=cpp" "$@"
