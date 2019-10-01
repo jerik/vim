@@ -20,10 +20,12 @@ map <Leader>c "+y
 " 	http://stackoverflow.com/q/26486948/1933185
 inoremap VV <C-r>+
 
-"ruby support"
-"inoremap <% <%=   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
-"inoremap ,end <% end  %> 
-"inoremap ,if <% if   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
+" https://stackoverflow.com/a/18948530/1933185
+" how about adding an autocmd, when FileType python, create a mapping:
+" autocmd FileType python nnoremap <buffer> <F5> :exec '!py' shellescape(@%, 1)<cr> " # 2019-10-01 not working
+"nnoremap <buffer> <F5> :exec '!py' shellescape(@%, 1)<cr>
+" TODO @todo should run only on a pyhton buffer ( with a python file )
+nmap <F5> :exec '!py' shellescape(@%, 1)<cr>
 
 "	Rechtschreibfehler automatisch verbessern
 "	See also:  http://www.igd.fhg.de/~zach/programs/acl/

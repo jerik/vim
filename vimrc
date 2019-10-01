@@ -212,7 +212,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'garbas/vim-snipmate'
 "Plug 'honza/vim-snippets'
 "Plug 'krisajenkins/vim-pipe' "# 2019-10-01 not usefull for python"
-"Plug 'tpope/vim-fugitive' 
+""Plug 'tpope/vim-fugitive'  "# 2019-10-01 not working, get errors, cannot execute :Git"
 call plug#end()
 
 " TODO @todo vim-airline # Needs the powerline fonts, installed. Does not work out of the box
