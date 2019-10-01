@@ -219,11 +219,12 @@ call plug#begin('~/.vim/plugged')
 "Plug 'pangloss/vim-javascript'
 "Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'https://github.com/garbas/vim-snipmate.git'
-Plug 'tomtom/tlib_vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim' "# not sure for which use case it is
+"Plug 'MarcWeber/vim-addon-mw-utils' "# not sure for which use case it is
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'krisajenkins/vim-pipe'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " 20170405 Removed neobundle"
