@@ -138,10 +138,6 @@ endif
 " 	jerik: 20141020
 " 	see :Tweak # looks interesting let's try :)
 
-" better colorschema"
-"color jerik
-colorscheme fruchtig
-
 " Fullscreen when opening vim # for winwos
 " http://unix.stackexchange.com/questions/40047/vim-script-check-running-platform
 if has( "win32" )
@@ -209,14 +205,29 @@ call plug#begin('~/.vim/plugged')
 "Plug 'tomtom/tlib_vim' "# not sure for which use case it is
 "Plug 'MarcWeber/vim-addon-mw-utils' "# not sure for which use case it is
 "Plug 'garbas/vim-snipmate'
+" for more vim-python stuff see: https://stackabuse.com/vim-for-python-development/
 "Plug 'honza/vim-snippets'
+" https://vimawesome.com/plugin/python-mode python-mode vs flake8
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" runs with F7, needs to have pip3 install flake8 for the venv! use :cnext, :cprevious
+Plug 'nvie/vim-flake8'
+" not sure if syntastic works, lets see if there is commign something :)
+Plug 'vim-syntastic/syntastic'
 Plug 'kien/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 Plug 'Townk/vim-autoclose'
 "Plug 'krisajenkins/vim-pipe' "# 2019-10-01 not usefull for python"
 ""Plug 'tpope/vim-fugitive'  "# 2019-10-01 not working, get errors, cannot execute :Git"
+Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
 " TODO @todo vim-airline # Needs the powerline fonts, installed. Does not work out of the box
 
+" better colorschema"
+"color jerik
+"colorscheme fruchtig
+colorscheme PaperColor
+if has("gui_running")
+	set background=light
+endif
