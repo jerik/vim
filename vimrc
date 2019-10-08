@@ -217,17 +217,27 @@ Plug 'kien/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'ervandew/supertab'
 Plug 'Townk/vim-autoclose'
+Plug 'tpope/vim-commentary'
 "Plug 'krisajenkins/vim-pipe' "# 2019-10-01 not usefull for python"
 ""Plug 'tpope/vim-fugitive'  "# 2019-10-01 not working, get errors, cannot execute :Git"
 Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
+" flake8 configurations -- seems not ot work; Die Spalte mit der Anzeige in
+" der Datei wird nicht mehr angezeigt, der fehler taucht noch im
+" dialog-fenster auf
+" see: https://github.com/vim-syntastic/syntastic/issues/204
+" let g:syntastic_python_checker_args='--ignore=E501'
+let g:syntastic_python_flake8_post_args='--ignore=E501'
+"let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225'
+
+
 " TODO @todo vim-airline # Needs the powerline fonts, installed. Does not work out of the box
 
 " better colorschema"
 "color jerik
-"colorscheme fruchtig
-colorscheme PaperColor
+colorscheme fruchtig
+" colorscheme PaperColor
 if has("gui_running")
 	set background=light
 endif
