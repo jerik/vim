@@ -222,6 +222,8 @@ Plug 'tpope/vim-commentary'
 ""Plug 'tpope/vim-fugitive'  "# 2019-10-01 not working, get errors, cannot execute :Git"
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'gabrielelana/vim-markdown'
+"   " Multiple Plug commands can be written in a single line using | separators
+"   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 call plug#end()
 
 " flake8 configurations -- seems not ot work; Die Spalte mit der Anzeige in
