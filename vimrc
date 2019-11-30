@@ -223,7 +223,7 @@ Plug 'tpope/vim-commentary'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'gabrielelana/vim-markdown'
 "   " Multiple Plug commands can be written in a single line using | separators
-"   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 call plug#end()
 
 " flake8 configurations -- seems not ot work; Die Spalte mit der Anzeige in
