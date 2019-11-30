@@ -221,6 +221,7 @@ Plug 'tpope/vim-commentary'
 "Plug 'krisajenkins/vim-pipe' "# 2019-10-01 not usefull for python"
 ""Plug 'tpope/vim-fugitive'  "# 2019-10-01 not working, get errors, cannot execute :Git"
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'gabrielelana/vim-markdown'
 call plug#end()
 
 " flake8 configurations -- seems not ot work; Die Spalte mit der Anzeige in

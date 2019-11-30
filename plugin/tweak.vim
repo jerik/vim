@@ -7,6 +7,12 @@
 "inoremap ' ''<LEFT>
 "inoremap \| \|\|<LEFT>
 
+" jerik 2019-11-29 https://github.com/Genivia/ugrep#vim
+if executable('ugrep')
+    set grepprg=ugrep\ -Rnk\ -u\ --tabs=1
+    set grepformat=%f:%l:%c:%m,%f+%l+%c+%m,%-G%f\\\|%l\\\|%c\\\|%m
+endif
+
 " Toogle ignorecase on search
 " http://stackoverflow.com/a/2317808/19335
 nmap <F9> :set ignorecase! ignorecase?<CR>
@@ -75,6 +81,7 @@ endfunction
 command! Sandbox call MyVimFiles( "sandbox" )
 command! Tweak call MyVimFiles( "tweak" )
 command! Myhelp call MyVimFiles( "myhelp" )
+command! Como :e $HOME/workspace/mind/idee-como.md
 
 imap ;; <ESC>:normal A;<CR>:w<CR>
 nmap ;; <ESC>:normal A;<CR>:w<CR>
@@ -96,6 +103,14 @@ nmap <C-Tab> :bn<CR>
 imap <C-Tab> :bn<CR>
 " verfügbar machen.
 ""imap <S-BS> <DEL>
+
+" jerik 2019-11-30 
+" go through the copen finding
+" Alt + Tabulator
+nmap <M-Tab> :cn<CR>
+imap <M-Tab> :cn<CR>
+nmap <M-S-Tab> :cp<CR>
+imap <M-S-Tab> :cp<CR>
 
 " jerik 2009-02-10: Text in den zwischenspeicher kopieren, damit man diesen woanders mit strg + v einfügen kann
 " http://codecocktail.wordpress.com/2008/10/27/vim-copypaste/
@@ -315,3 +330,26 @@ function! ToggleTextWrap()
 endfunction
 " F10: Highlight too long lines
 "map<F10> :call ToggleTextWrap()<CR>
+
+" huzzah32 / micropython development cheats
+"
+" https://theterminallife.com/sending-commands-into-a-screen-session/
+" @todo refactor: 
+"    check if screen session is running, otherwise throw error
+function! AdafruitRunFileOnScreen()
+	let screensession = 'screen -S devel'
+	echo "'" . screensession . "' must run!"
+	echo "vim and screen must run in the same directory"
+	exe "!" . screensession . " -X stuff 'ampy run " . bufname('%') . "'$(echo -ne '\015')"
+endfunction
+command! Arun call AdafruitRunFileOnScreen()
+map<F10> :call AdafruitRunFileOnScreen()<CR>
+
+
+function! AdafruitPutFileOnScreen()
+	let screensession = 'screen -S devel'
+	echo "'" . screensession . "' must run!"
+	echo "vim and screen must run in the same directory"
+	exe "!" . screensession . " -X stuff 'ampy put " . bufname('%') . "'$(echo -ne '\015')"
+endfunction
+command! Aput call AdafruitPutFileOnScreen()
