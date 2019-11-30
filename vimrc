@@ -215,14 +215,14 @@ Plug 'nvie/vim-flake8'
 Plug 'vim-syntastic/syntastic'
 Plug 'kien/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab' " 2019-12-01 disabled supertab, perhaps it interferes with ultisnips
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
 "Plug 'krisajenkins/vim-pipe' "# 2019-10-01 not usefull for python"
 ""Plug 'tpope/vim-fugitive'  "# 2019-10-01 not working, get errors, cannot execute :Git"
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'gabrielelana/vim-markdown'
-"   " Multiple Plug commands can be written in a single line using | separators
+"   Multiple Plug commands can be written in a single line using | separators
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 call plug#end()
 
@@ -233,6 +233,11 @@ call plug#end()
 " let g:syntastic_python_checker_args='--ignore=E501'
 let g:syntastic_python_flake8_post_args='--ignore=E501'
 "let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225'
+
+" 2019-12-01 ultisnip configuration 
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
 " TODO @todo vim-airline # Needs the powerline fonts, installed. Does not work out of the box
