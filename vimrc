@@ -236,8 +236,8 @@ let g:syntastic_python_flake8_post_args='--ignore=E501'
 
 " 2019-12-01 ultisnip configuration 
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 
 " TODO @todo vim-airline # Needs the powerline fonts, installed. Does not work out of the box
