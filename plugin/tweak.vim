@@ -1,11 +1,17 @@
 " Boost programming in vim
 " 05.04.2017 perhaps obsolete with https://github.com/Raimondi/delimitMate
-inoremap { {  }<LEFT><LEFT>
-inoremap [ []<LEFT>
-inoremap ( (  )<LEFT><LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
+"inoremap { {  }<LEFT><LEFT>
+"inoremap [ []<LEFT>
+"inoremap ( (  )<LEFT><LEFT>
+"inoremap " ""<LEFT>
+"inoremap ' ''<LEFT>
 "inoremap \| \|\|<LEFT>
+
+" jerik 2019-11-29 https://github.com/Genivia/ugrep#vim
+if executable('ugrep')
+    set grepprg=ugrep\ -Rnk\ -u\ --tabs=1
+    set grepformat=%f:%l:%c:%m,%f+%l+%c+%m,%-G%f\\\|%l\\\|%c\\\|%m
+endif
 
 " Toogle ignorecase on search
 " http://stackoverflow.com/a/2317808/19335
@@ -20,16 +26,12 @@ map <Leader>c "+y
 " 	http://stackoverflow.com/q/26486948/1933185
 inoremap VV <C-r>+
 
-"ruby support"
-"inoremap <% <%=   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
-"inoremap ,end <% end  %> 
-"inoremap ,if <% if   %> <LEFT><LEFT><LEFT><LEFT><LEFT>
-
-"	Rechtschreibfehler automatisch verbessern
-"	See also:  http://www.igd.fhg.de/~zach/programs/acl/
-iab alos    also
-iab aslo    also
-iab sonder	sondern
+" https://stackoverflow.com/a/18948530/1933185
+" how about adding an autocmd, when FileType python, create a mapping:
+" autocmd FileType python nnoremap <buffer> <F5> :exec '!py' shellescape(@%, 1)<cr> " # 2019-10-01 not working
+"nnoremap <buffer> <F5> :exec '!py' shellescape(@%, 1)<cr>
+" TODO @todo should run only on a pyhton buffer ( with a python file )
+nmap <F5> :exec '!py' shellescape(@%, 1)<cr>
 
 " 	hilfreiche Ersetzungen
 iab ydate <C-R>=strftime("%d.%m.%Y")<CR>
@@ -79,6 +81,7 @@ endfunction
 command! Sandbox call MyVimFiles( "sandbox" )
 command! Tweak call MyVimFiles( "tweak" )
 command! Myhelp call MyVimFiles( "myhelp" )
+command! Como :e $HOME/workspace/mind/idee-como.md
 
 imap ;; <ESC>:normal A;<CR>:w<CR>
 nmap ;; <ESC>:normal A;<CR>:w<CR>
@@ -101,9 +104,19 @@ imap <C-Tab> :bn<CR>
 " verfügbar machen.
 ""imap <S-BS> <DEL>
 
+" jerik 2019-11-30 
+" go through the copen finding
+" Alt + Tabulator
+nmap <M-Tab> :cn<CR>
+imap <M-Tab> :cn<CR>
+nmap <M-S-Tab> :cp<CR>
+imap <M-S-Tab> :cp<CR>
+
 " jerik 2009-02-10: Text in den zwischenspeicher kopieren, damit man diesen woanders mit strg + v einfügen kann
 " http://codecocktail.wordpress.com/2008/10/27/vim-copypaste/
 " normalerweise um eine zeile zu kopieren: "+dd
+" jerik 2019-10-01 Funktioniert das noch? Alt+m hat auf osx nicht die
+" beschriebene funktion
 nmap <M-d> "+dd
 
 "" jerik: Sobald ich mich im Vim mit dem Cursor bewege verschwinden alle search highligts
@@ -160,7 +173,8 @@ iab <expr> nwe strftime("%%%Y%m%d", localtime(  ) + ( 7*24*3600 ))
 " replaces no every variation of @todo*"
 nmap ,d <ESC>:call ToDo( "done" )<CR>
 nmap ,w <ESC>:call ToDo( "wait" )<CR>
-nmap ,o <ESC>:call ToDo( "todo" )<CR>
+" todo start. Vorher war es ,o aber das konkurriet mit Nextv2
+nmap ,s <ESC>:call ToDo( "todo" )<CR>
 nmap ,c <ESC>:call ToDo( "cancel" )<CR>
 nmap ,p <ESC>:call ToDo( "postponed" )<CR>
 nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
@@ -168,13 +182,8 @@ nmap ,x <ESC>:call ToDo( "notmybusiness" )<CR>
 nmap ,m <ESC>:call ToDo( "delegated" )<CR>
 " alte vergangene Sachen die nicht gemacht wurden
 nmap ,a <ESC>:call ToDo( "past" )<CR> 
-"nmap ,d <ESC>:Tododone<CR>:w<CR>
-"nmap ,o <ESC>:Todotodo<CR>:w<CR>
-"nmap ,c <ESC>:Todocancel<CR>:w<CR>
 
 "nmap ,d <ESC>:s/@todo.\{-} /@done /<CR>:w<CR>
-"nmap ,w <ESC>:s/@todo.\{-} /@todo-wait /<CR>:w<CR>
-"nmap ,c <ESC>:s/@todo.\{-} /@canceled /<CR>:w<CR>
 nmap ,n <ESC>:s/@todo/@todo-next/<CR>:w<CR>
 nmap ,t <ESC>:call NewTodos()<CR>
 nmap ,l <ESC>:Log<CR>
@@ -321,3 +330,26 @@ function! ToggleTextWrap()
 endfunction
 " F10: Highlight too long lines
 "map<F10> :call ToggleTextWrap()<CR>
+
+" huzzah32 / micropython development cheats
+"
+" https://theterminallife.com/sending-commands-into-a-screen-session/
+" @todo refactor: 
+"    check if screen session is running, otherwise throw error
+function! AdafruitRunFileOnScreen()
+	let screensession = 'screen -S devel'
+	echo "'" . screensession . "' must run!"
+	echo "vim and screen must run in the same directory"
+	exe "!" . screensession . " -X stuff 'ampy run " . bufname('%') . "'$(echo -ne '\015')"
+endfunction
+command! Arun call AdafruitRunFileOnScreen()
+map<F10> :call AdafruitRunFileOnScreen()<CR>
+
+
+function! AdafruitPutFileOnScreen()
+	let screensession = 'screen -S devel'
+	echo "'" . screensession . "' must run!"
+	echo "vim and screen must run in the same directory"
+	exe "!" . screensession . " -X stuff 'ampy put " . bufname('%') . "'$(echo -ne '\015')"
+endfunction
+command! Aput call AdafruitPutFileOnScreen()

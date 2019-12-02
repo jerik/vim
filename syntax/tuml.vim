@@ -16,10 +16,15 @@ endif
 syn case ignore
 
 " jerik creation "
-syn match	pcom	  	"\#.*"
+syn match	Comment	  	"(\*.*" 
+syn match	Comment	  	"^\*)*"
+syn match   String   	"class\|end;\|state"
+syn match   Keyword   	"specializes"
+syn match   Special   	"attribute\|package\|primitive\|navigable"
+syn match   Identifier  "composition\|aggregation\|association\|operation\|transition"
+syn match   Underlined  "enumeration\|datatype"
+syn match   Type   	"abstract\|interface"
 syn match   embraced  	"\".*\"" contains=ip,time
-syn match   done   		"^.done.*"
-syn match   past   		"^.past.*"
 syn match   cancel   	"^.canceled.*"
 syn match   postponed  	"^.postponed.*"
 syn match   postponed  	"^.notmybusiness.*"
@@ -27,7 +32,6 @@ syn match   postponed  	"^.delegated.*"
 syn match   todo   		"^.todo.*"
 syn match   back   		"^.back"
 syn match   vorschlag	"^.decision"
-syn match   vorschlag	"^.leitlinie"
 ""syn match   url     	"http:.*"
 ""syn match   urls     	"https:.*"
 syn match   errorlver   "^!!.*"
@@ -40,6 +44,10 @@ syn match   errorlver "\[error\]"
 syn match   time      contained "[^0-9a-z]\([0-9]\{2}:\)\{2}[0-9]\{2}[^0-9a-z]" 
 syn match   ip        contained "[^0-9a-z]\([0-9]\{1,3}\.\)\{3}[0-9]\{1,3}[^0-9a-z]"
 syn match   refer     "referer: http://.*"
+
+
+" Classes
+syntax keyword jsClassKeyword           contained class
 
 if version >= 508 || !exists("did_apachelogs_syntax_inits")
   if version < 508
@@ -59,7 +67,6 @@ if version >= 508 || !exists("did_apachelogs_syntax_inits")
 " jerik creation "
   HiLink pcom		Comment
   HiLink done  		Special
-  HiLink past  		Special
   HiLink cancel  	Special
   HiLink postponed  Folded
   HiLink todo   	Todo
@@ -68,11 +75,13 @@ if version >= 508 || !exists("did_apachelogs_syntax_inits")
   HiLink url   		Underlined
   HiLink urls  		Underlined
 
+  HiLink jsClassKeyword         Keyword
+
   delcommand HiLink
 endif
 
 
-let b:current_syntax = "plog"
+let b:current_syntax = "tuml"
 
 " vim: ts=8 sw=2
 

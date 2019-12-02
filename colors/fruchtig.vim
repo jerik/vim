@@ -64,4 +64,3 @@ hi! link Todo             PreProc
 hi! link schemeError      PreProc
 hi! link TabLineSel       StatusLine
 hi! link PmenuSel         WildMenu
-

@@ -19,18 +19,15 @@ syn case ignore
 syn match	pcom	  	"\#.*"
 syn match   embraced  	"\".*\"" contains=ip,time
 syn match   done   		"^.done.*"
-syn match   past   		"^.past.*"
-syn match   cancel   	"^.canceled.*"
-syn match   postponed  	"^.postponed.*"
+syn match   cancel   	"^.....AR|.*"
+syn match   errorlver  	"^.....ARS.*"
 syn match   postponed  	"^.notmybusiness.*"
-syn match   postponed  	"^.delegated.*"
-syn match   todo   		"^.todo.*"
-syn match   back   		"^.back"
+syn match   todo   		"^.....MR|.*"
+syn match   postponed	"^FIRC.*\|^LARC.*"
 syn match   vorschlag	"^.decision"
-syn match   vorschlag	"^.leitlinie"
 ""syn match   url     	"http:.*"
 ""syn match   urls     	"https:.*"
-syn match   errorlver   "^!!.*"
+syn match   errorlver   "^.....MRS.*"
 syn match   cancel   	"^??.*"
 syn match   postponed  	"^::.*"
 
@@ -39,7 +36,11 @@ syn match   errorlv   "\[error\]\|\[warn\]\|\[notice\]"
 syn match   errorlver "\[error\]"
 syn match   time      contained "[^0-9a-z]\([0-9]\{2}:\)\{2}[0-9]\{2}[^0-9a-z]" 
 syn match   ip        contained "[^0-9a-z]\([0-9]\{1,3}\.\)\{3}[0-9]\{1,3}[^0-9a-z]"
-syn match   refer     "referer: http://.*"
+syn match   refer     "90000....."
+syn match   delimiter     "|"
+syn match   back     "40000....."
+syn match   errorlver     "41000....."
+syn match   errorlver     "|DS|"
 
 if version >= 508 || !exists("did_apachelogs_syntax_inits")
   if version < 508
@@ -55,11 +56,11 @@ if version >= 508 || !exists("did_apachelogs_syntax_inits")
   HiLink time       Identifier
   HiLink ip         Special 
   HiLink refer      Keyword 
+  HiLink delimiter      Keyword 
 
 " jerik creation "
   HiLink pcom		Comment
   HiLink done  		Special
-  HiLink past  		Special
   HiLink cancel  	Special
   HiLink postponed  Folded
   HiLink todo   	Todo

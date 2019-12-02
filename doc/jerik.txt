@@ -340,14 +340,21 @@ Folgenden interessate Register gibt es ( Auszug ):
 	"* aktueller OS copy register
 	". aktelles ausgef√ºhrter punkt-ding in vim
 
-Zugriff auf die Register erh√§lt man mit 
+Zugriff auf die Register erh‰lt man mit ( im insert mode )
 	<C-R>register
+
+wobei <C-R>p f¸r das normale kopieren einfacher geht
 
 Beispielsweise paste der letzten suche
 	<C-R>/
 
 Beispielsweise paste des OS copy registers
 	<C-R>*
+
+Um in den last-line mode / command line mode zu pasten muss man 
+erst in diesen gehen. Um beispielweise den lezte yank im command line mode 
+zu nutzen: 
+	:<C-R>"
 
 
 Cursor magic										 *jk-cursor*
@@ -369,13 +376,36 @@ Erzeugt eine pro Zeile einen Eintrag von 1 bis 25
 
 calculations, iteration numbers										 *jk-calc*
 -----------------------------------------------------------------------------
-Man kann in vim hoch und runterz√§hlen. Dazu mit dem Cursor auf der Zahl sein: 
+Man kann in vim hoch und runterz‰hlen. Dazu mit dem Cursor auf der Zahl sein: 
 
-	<C-x> = hochz√§hlen
-	<C-a> = runterz√§hlen
+	<C-x> = hochz‰hlen
+	<C-a> = runterz‰hlen
 
 Rechnen im Commandline mode
-
 	:<C-r>=7*7<Enter>
+
+Open Url										 *jk-open-url*
+-----------------------------------------------------------------------------
+Mit dem cursor auf einem URL sein und dann
+	
+	gx
+
+eingeben. Daraufhin wird die URL im Standardbrowser aufgerufen
+
+Nummer vor Zeilen erzeugen								 *jk-gen-numbers*
+-----------------------------------------------------------------------------
+Wenn man eine Liste von Nummer vor Zeilen braucht, geht das wiefolgt, nachdem
+man die Zeilen markiert hat
+
+	:'<,'>s/^\S/\=printf("%d.\t", line(".") - line("'<") + 1)
+
+Will man nicht bei 1 Anfangen sondern bei 12, dann ersetzt man die +1 mit +12
+Quelle: http://vim.wikia.com/wiki/Insert_line_numbers
+
+Will man nur eine Liste erzeugen geht das mit 
+
+	:put =range(2,12)
+
+Quelle: http://vim.wikia.com/wiki/Making_a_list_of_numbers
 
   vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:
