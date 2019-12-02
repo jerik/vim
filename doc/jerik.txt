@@ -1,6 +1,6 @@
 *jk-scripting-help* *jerik*
 
-Tipps f�rs vim scripting. Zur bessren konfiguration.
+Tipps fï¿½rs vim scripting. Zur bessren konfiguration.
 
 Abbreviations												*jk-abbr* 
 -----------------------------------------------------------------------------
@@ -25,15 +25,15 @@ Man kann auch Mappings auf eine abbreviation legen:
 Lokale Hilfe												*jk-local-help*
 -----------------------------------------------------------------------------
 Um die lokale hilfe in vim erreichbar zu machen, muss man nachfolgendes 
-Kommando ausf�hren. Dabei ist ~/.vim/doc das verzeichnis in dem ich den
-Hilfetext erstellt habe. (Sollte defaultm�ssig immer so sein)
+Kommando ausfï¿½hren. Dabei ist ~/.vim/doc das verzeichnis in dem ich den
+Hilfetext erstellt habe. (Sollte defaultmï¿½ssig immer so sein)
 
 	:helptags ~/.vim/doc								|add-local-help|
 
 
-Funktion ausf�hrbar machen									*jk-add-function*
+Funktion ausfï¿½hrbar machen									*jk-add-function*
 -----------------------------------------------------------------------------
-Um eine Funktion ausf�hrbar zu machen �ber den Commandline-Modus, muss man
+Um eine Funktion ausfï¿½hrbar zu machen ï¿½ber den Commandline-Modus, muss man
 die Funktion mit |command| registrieren.
 
 	function! Abc()
@@ -50,14 +50,14 @@ Besitzt die Funktion paramater, sieht das wiefolgt aus.
 	
 	command  -nargs=1 Xyz call Xyz("<args>")
 
-Wobei -nargs=1 aufzeigt wieviel parameter angegeben werden m�ssen. Sollen
+Wobei -nargs=1 aufzeigt wieviel parameter angegeben werden mï¿½ssen. Sollen
 parameter optional angegeben werden dann lautet mit '*', d.h. -nargs=*
 
 
 Concat - Variablen und Strings verbinden  					*jk-concat*
 -----------------------------------------------------------------------------
 Um eine variable mit einem string zu verbinden muss man den string in 
-Anf�hrungszeichen setzen, und string mit varibale �ber den concatenator . 
+Anführungszeichen setzen, und string mit varibale über den concatenator . 
 verbinden
 
 	let FILE=foo
@@ -66,21 +66,21 @@ verbinden
 
 Execute the current File - 									*jk-execute*
 -----------------------------------------------------------------------------
-Um die Datei auszuf�hren die man gerade bearbeitet kann man nachfolgende
+Um die Datei auszufï¿½hren die man gerade bearbeitet kann man nachfolgende
 Kommandos in der .vimrc festlegen:
 
 	autocmd FileType python map <F7> :!python %<CR>
 	autocmd FileType sh map <F7> :!bash -c ./%<CR>
 
-Damit wir beim dr�cken von <F7> der entsprechende interpreter mit der 
-Datei ausgef�hrt. ODER:
+Damit wir beim drï¿½cken von <F7> der entsprechende interpreter mit der 
+Datei ausgefï¿½hrt. ODER:
 
     nnoremap <F12> :!%:p<CR>
 
 Siehe dazu auch ":help cmdline-special".
 	
 
-Vertikales Selektieren (Ausw�hlen)					*jk-vert-select*
+Vertikales Selektieren (Auswï¿½hlen)					*jk-vert-select*
 -----------------------------------------------------------------------------
 Um in einer Textdatei Vertikal zu selektieren benutzt man den shortcut
 
@@ -104,7 +104,7 @@ Zeigt an in welcher Datei das Kommando definiert ist, bspw.
 	n  ,t            <Esc>:Todos<CR>:w<CR>
 			Last set from ~/.vim/plugin/mygft.vim
 
-Andere M�glichkeiten w�ren: 
+Andere Mï¿½glichkeiten wï¿½ren: 
 	:verbose filetype
 
 
@@ -158,24 +158,24 @@ By contrast, each of the following has a special meaning anywhere in a search pa
 see: http://vim.wikia.com/wiki/Search_across_multiple_lines
 
 
-Suchen und l�schen 						  					*jk-delete*
+Suchen und löschen 						  					*jk-delete*
 -----------------------------------------------------------------------------
-Alle Zeilen l�schen die NICHT das pattern (Muster) enthalten 
+Alle Zeilen lï¿½schen die NICHT das pattern (Muster) enthalten 
 
 	:!g/pattern/d 
 	:v/pattern/d
 
-Alle Zeilen l�schen die das pattern (Muster) enthalten 
+Alle Zeilen lï¿½schen die das pattern (Muster) enthalten 
 
 	:g/pattern/d
 
-Alle leere Zeilen löschen
+Alle leere Zeilen lÃ¶schen
 	:%s/^$\n//g
 	
 Alle linebreaks loeschen, d.h. eine einzige Zeile erstellen
 	:%j
 
-Alle tags löschen, contnet bleibt erhalten
+Alle tags lÃ¶schen, contnet bleibt erhalten
 	:%s/<\_.\{-1,\}>//g
 	
 Suchen und kopieren (yank) 			  					*jk-yank* *jk-copy*
@@ -186,9 +186,9 @@ Alle Zeilen in register "a kopieren, die das wort pattern enthalten
 	:g/pattern/y A
 
 :global findet alle vorkommen von pattern, danach kann man ex-operationen wie
-yank ( y ) oder delete ( d ) ausf�hren
+yank ( y ) oder delete ( d ) ausfï¿½hren
 
-Den kopierten Inhalt wieder einf�gen: 
+Den kopierten Inhalt wieder einfï¿½gen: 
 	
 	"aP				Register a pasten
 
@@ -203,22 +203,22 @@ end-klammmer navigieren und folgenden eingeben:
 
 	v%			# bei ([{  
 	y%			# kopiert sofort alles bei ([{  
-	d%			# l�scht alles bei ([{  
-	c%			# l�scht alles bei ([{ und geht in den insert mode
+	d%			# lï¿½scht alles bei ([{  
+	c%			# lï¿½scht alles bei ([{ und geht in den insert mode
 
 Alles innerhalb von Klammern markieren. Dazu muss man innerhalb der Klammer
-sein: 	f�r kopieren y, l�schen d, l�schen und insert mode c, anstelle von v
+sein: 	fï¿½r kopieren y, lï¿½schen d, lï¿½schen und insert mode c, anstelle von v
 
 	vib 		# bei (
 	viB			# bei [
 	vit			# bei <tag>
 
-Alles innnherhalb von Anf�hrungszeichen markieren. Dazu muss man innerhalb der
-Anf�hrungzeichen sein: 	f�r kopieren y ,l�schen d, l�schen und insert mode c 
+Alles innnherhalb von Anfï¿½hrungszeichen markieren. Dazu muss man innerhalb der
+Anfï¿½hrungzeichen sein: 	fï¿½r kopieren y ,lï¿½schen d, lï¿½schen und insert mode c 
 anstelle von v
 
-	vi"			# bei " ( doppeltes G�nsef�sschen )
-	vi'			# bei ' ( einfaches G�nsef�sschen )
+	vi"			# bei " ( doppeltes Gï¿½nsefï¿½sschen )
+	vi'			# bei ' ( einfaches Gï¿½nsefï¿½sschen )
 
 
 Spring innerhalb von Quellcode					*jk-select*
@@ -236,25 +236,25 @@ oder zum start einer Funktion:
 	<S-6>		springt zum ersten Zeichen der Zeile
 
 	y%			# kopiert sofort alles bei   
-	d%			# l�scht alles bei ([{  
-	c%			# l�scht alles bei ([{ und geht in den insert mode
+	d%			# lï¿½scht alles bei ([{  
+	c%			# lï¿½scht alles bei ([{ und geht in den insert mode
 
 Alles innerhalb von Klammern markieren. Dazu muss man innerhalb der Klammer
 
 Normal commands in insert mode						 *jk-insert*
 -----------------------------------------------------------------------------
-Um ein commando im normal mode w�hrend des insert modes auszuf�hren, kann man
-mit <C-o> (Strg + o) kurz in den Modus reinwechseln. Nach ausf�hren des
+Um ein commando im normal mode wï¿½hrend des insert modes auszufï¿½hren, kann man
+mit <C-o> (Strg + o) kurz in den Modus reinwechseln. Nach ausfï¿½hren des
 Kommandos ist man automatisch wieder im insert mode. 
 
-Bspw. wenn man an der ersten Zeile was einf�gen will
+Bspw. wenn man an der ersten Zeile was einfï¿½gen will
 
 	<C-o>gg
 
 
 Count lines												 *jk-count*
 -----------------------------------------------------------------------------
-Um markierte Zeilen zu zählen, und die darin enthaltenen Wörter: 
+Um markierte Zeilen zu zÃ¤hlen, und die darin enthaltenen WÃ¶rter: 
 
 	g<C-g>
 
@@ -266,7 +266,7 @@ Um in einer vertical visuelle selction zu ersetzen, verwendet man \%V. Bspw.
 	:'<,'>s/\%V{pat}/{sub}/g
 
 Will man bei der selection unterschiedliche matches mit gleichen Inhalten ersetzten. 
-Bspw: wenn 3 spalten selektiert sind und man 123 einf�gen will, d.h. 1. Spalte = 1
+Bspw: wenn 3 spalten selektiert sind und man 123 einfügen will, d.h. 1. Spalte = 1
 2. Spalte = 2, 3. Spalte = 3
 
 	:'<,'>s/\%V.../123/g
@@ -279,10 +279,10 @@ Um die vorherige Suche im replace zu verwenden
 	/foo
 	:%s//{sub}/g
 
-Replace nutzt die letzte suche f�r das search and replace. In diesem Fall "foo"
+Replace nutzt die letzte suche für das search and replace. In diesem Fall "foo"
 
-Replace nur auf best�tigung durchf�hren. Dann nutzt man die option c ( check). 
-Damit erh�lt man bei jedem foo eine Frage was damit zu tun ist: y(es), n(o)
+Replace nur auf bestätigung durchführen. Dann nutzt man die option c ( check). 
+Damit erhält man bei jedem foo eine Frage was damit zu tun ist: y(es), n(o)
 
 	%s/foo/bar/gc
 
@@ -338,9 +338,9 @@ Folgenden interessate Register gibt es ( Auszug ):
 	"# vorheriger Buffer dateiname
 	": letztes ex commando
 	"* aktueller OS copy register
-	". aktelles ausgef�hrter punkt-ding in vim
+	". aktelles ausgeführter punkt-ding in vim
 
-Zugriff auf die Register erh�lt man mit 
+Zugriff auf die Register erhält man mit 
 	<C-R>register
 
 Beispielsweise paste der letzten suche
@@ -367,5 +367,15 @@ Eine Reihe von Nummern erzeugen
 
 Erzeugt eine pro Zeile einen Eintrag von 1 bis 25
 
+calculations, iteration numbers										 *jk-calc*
+-----------------------------------------------------------------------------
+Man kann in vim hoch und runterzählen. Dazu mit dem Cursor auf der Zahl sein: 
+
+	<C-x> = hochzählen
+	<C-a> = runterzählen
+
+Rechnen im Commandline mode
+
+	:<C-r>=7*7<Enter>
 
   vim:tw=78:shiftwidth=4:tabstop=4:ft=help:norl:
