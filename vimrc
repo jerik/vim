@@ -223,6 +223,7 @@ Plug 'tpope/vim-commentary'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'gabrielelana/vim-markdown'
 "   Multiple Plug commands can be written in a single line using | separators
+"   https://yufanlu.net/2016/10/30/ultisnips/ cool usage tips
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 call plug#end()
 
@@ -235,9 +236,11 @@ let g:syntastic_python_flake8_post_args='--ignore=E501'
 "let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225'
 
 " 2019-12-01 ultisnip configuration 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" The below shortcuts are the default wonesss. See help: Trigger key mappings
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsListSnippets="<c-tab>
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 
 " TODO @todo vim-airline # Needs the powerline fonts, installed. Does not work out of the box
