@@ -233,6 +233,9 @@ Plug 'gabrielelana/vim-markdown'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 call plug#end()
 
+" disable spell checking 
+let g:markdown_enable_spell_checking = 0
+
 " flake8 configurations -- seems not ot work; Die Spalte mit der Anzeige in
 " der Datei wird nicht mehr angezeigt, der fehler taucht noch im
 " dialog-fenster auf
