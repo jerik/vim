@@ -241,7 +241,7 @@ let g:markdown_enable_spell_checking = 0
 " dialog-fenster auf
 " see: https://github.com/vim-syntastic/syntastic/issues/204
 " let g:syntastic_python_checker_args='--ignore=E501'
-let g:syntastic_python_flake8_post_args='--ignore=E501'
+let g:syntastic_python_flake8_post_args='--ignore=E501,E401'
 "let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225'
 
 " 2019-12-01 ultisnip configuration 
