@@ -168,6 +168,7 @@ set guifont=Meslo_LG_M_Regular_for_Powerline:h12
 
 " 	Projects notes mit neuer Syntax versehen
 au BufRead,BufNewFile *.log set filetype=plog 
+au BufRead,BufNewFile Journal.txt set filetype=plog 
 
 
 " 	jerik 20141014

@@ -131,6 +131,7 @@ nmap <M-d> "+dd
 " my project vim
 
 " For a better workspace logfiles 
+" 2020-03-28 not working togehter with ultiSnips
 iab ato		@todo
 iab atn 	@todo-next
 iab atw		@todo-wait
