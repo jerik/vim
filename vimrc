@@ -262,3 +262,23 @@ colorscheme fruchtig
 if has("gui_running")
 	set background=light
 endif
+
+" Nerdtree like setup of netrw
+" https://shapeshed.com/vim-netrw/
+" :Ex, :Sex, :Vex = current, horizontal split, vertical split window
+" remove banner; Toggle with "I"
+let g:netrw_banner = 0
+" Listing style. Cycle through styles with "i"
+let g:netrw_liststyle = 3
+
+" open in 1, 2, 3, 4 = new horizontal, new vertical split, new tab, previous
+" window
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+" Set witdht of the directory explorer
+let g:netrw_winsize = 25
+" open when starting with vim; do I need that?
+augroup ProjectDrawer
+  	autocmd!
+	autocmd VimEnter * :Vexplore
+augroup END
