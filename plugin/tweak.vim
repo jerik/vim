@@ -354,3 +354,15 @@ function! AdafruitPutFileOnScreen()
 	exe "!" . screensession . " -X stuff 'ampy put " . bufname('%') . "'$(echo -ne '\015')"
 endfunction
 command! Aput call AdafruitPutFileOnScreen()
+
+function! Folds()
+	" https://www.linux.com/training-tutorials/vim-tips-folding-fun/
+	" close and open all folds: zi
+	" open a fold und subfolds: zO
+	" close a fold: zc
+	" for pyhton use foldmethod=indent, otherweise fold method=syntax
+	set foldmethod=indent
+	set foldnestmax=2
+	:echo "toggle open/close all folds: zi, open subfolds: zO, close fold: zc, next/previous fold: zj/k"
+endfunction
+command! Folds call Folds()
