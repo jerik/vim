@@ -31,7 +31,11 @@ inoremap VV <C-r>+
 " autocmd FileType python nnoremap <buffer> <F5> :exec '!py' shellescape(@%, 1)<cr> " # 2019-10-01 not working
 "nnoremap <buffer> <F5> :exec '!py' shellescape(@%, 1)<cr>
 " TODO @todo should run only on a pyhton buffer ( with a python file )
-nmap <F5> :exec '!py' shellescape(@%, 1)<cr>
+" 2020-06-18 jerik
+" Because of Fatal Python Error: config_get_locale_endocding
+" https://stackoverflow.com/q/60557160/1933185
+nmap <F5> :exec '!export LANG="de_DE.UTF-8"; py' shellescape(@%, 1)<cr>
+" nmap <F5> :exec '!py' shellescape(@%, 1)<cr>
 
 " 	hilfreiche Ersetzungen
 iab ydate <C-R>=strftime("%d.%m.%Y")<CR>
@@ -275,14 +279,17 @@ function! FindCurrentLine()
 	:let line = getline('.')
 	" try to get rid of / in the line, as this causes problems when finding
 	" the line in the journal
-	" This is done, because I set the search register manually
+	" This is done, because I set the search register manually (let @/ = ...)
 	" http://vim.wikia.com/wiki/Searching_for_expressions_which_include_slashes
-	:let part = strpart( line, 30 )
-	""let @/ = line
-	" get only a part of the line to work with adjusted todo-waits
-	let @/ = part
-	:exe 'e ' . g:journal
-	:normal n
+	let words = split(line)  " split with default seperator '  '
+	if match(words, ']') > 0
+		let cut_pos = match(line, ']') + 2
+	else 
+		let cut_pos = match(line, ' ') + 1
+	endif
+	let @/ = strcharpart(line, cut_pos)
+	exe 'e ' . g:journal
+	normal n
 endfunction
 
 ""command! -nargs=1 Todo :call Todo("<args>")  

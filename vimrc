@@ -232,6 +232,7 @@ Plug 'gabrielelana/vim-markdown'
 "   Multiple Plug commands can be written in a single line using | separators
 "   https://yufanlu.net/2016/10/30/ultisnips/ cool usage tips
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 " disable spell checking 
@@ -278,7 +279,7 @@ let g:netrw_altv = 1
 " Set witdht of the directory explorer
 let g:netrw_winsize = 25
 " open when starting with vim; do I need that?
-augroup ProjectDrawer
-  	autocmd!
-	autocmd VimEnter * :Vexplore
-augroup END
+" augroup ProjectDrawer
+"  	autocmd!
+"	autocmd VimEnter * :Vexplore
+" augroup END
