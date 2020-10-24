@@ -373,3 +373,20 @@ function! Folds()
 	:echo "toggle open/close all folds: zi, open subfolds: zO, close fold: zc, next/previous fold: zj/k"
 endfunction
 command! Folds call Folds()
+
+" 2020-10-25 
+" @todo remove when is fixed
+" Workaround until the gx problem is fixed 
+" https://groups.google.com/g/vim_dev/c/TJ_wQjZTQdg or
+" https://github.com/vim/vim/issues/4738#issuecomment-714609892
+if has('macunix')
+  function! OpenURLUnderCursor()
+    let s:uri = matchstr(getline('.'), '[a-z]*:\/\/[^ >,;()]*')
+    let s:uri = shellescape(s:uri, 1)
+    if s:uri != ''
+      silent exec "!open '".s:uri."'"
+      :redraw!
+    endif
+  endfunction
+  nnoremap gx :call OpenURLUnderCursor()<CR>
+endif
