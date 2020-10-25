@@ -303,7 +303,10 @@ function! ToDo( type )
 " a:1 is the first parameter, a:2 is the second...
 
 	if a:type == "done"
-		:s/@todo\%(-\w\+\)* /@done / 
+		"s instead :s, seems to work
+		s/@todo\%(-\w\+\)* /@done / 
+		" normal instead of :normal, seems to work
+		exe 'normal! A' . ' # ' . strftime('%Y-%m-%d')
 	elseif a:type == "wait"
 		:s/@todo\%(-\w\+\)* /@todo-wait / 
 		":s/@todo.\{-} /@todo-wait /
@@ -320,7 +323,8 @@ function! ToDo( type )
 	elseif a:type == "delegated"
 		:s/@todo\%(-\w\+\)* /@delegated / 
 	elseif a:type == "past"
-		:s/@todo\%(-\w\+\)* /@past / 
+		s/@todo\%(-\w\+\)* /@past / 
+		exe 'normal! A' . ' # ' . strftime('%Y-%m-%d')
 	endif
 	:w
 endfunction
