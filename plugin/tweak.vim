@@ -292,6 +292,20 @@ function! FindCurrentLine()
 	normal n
 endfunction
 
+" remove date if given in todo, e.g. todo-wait 2020-10-25 or todo-next 2020-10-25 
+function! SimpleTodo()
+	let line = getline('.')
+	let words = split(line)
+	if match(words[1], '-\d\d-') == 4
+		let cut_pos = match(line, '-\d\d-') + 6
+		let content = strcharpart(line, cut_pos)
+		exe 'normal S'
+		exe 'normal I' . '@todo' . content
+	else
+		s/@todo\%(-\w\+\)* /@todo / 
+	endif
+endfunction 
+
 ""command! -nargs=1 Todo :call Todo("<args>")  
 
 "relpace @todo wit @done"
@@ -311,7 +325,8 @@ function! ToDo( type )
 		:s/@todo\%(-\w\+\)* /@todo-wait / 
 		":s/@todo.\{-} /@todo-wait /
 	elseif a:type == "todo"
-		:s/@todo\%(-\w\+\)* /@todo / 
+		" s/@todo\%(-\w\+\)* /@todo / 
+		call SimpleTodo()
 	elseif a:type == "cancel"
 		:s/@todo\%(-\w\+\)* /@canceled / 
 	elseif a:type == "postponed"
