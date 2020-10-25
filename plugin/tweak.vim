@@ -336,12 +336,14 @@ endfunction
 function! ToggleTextWrap()
     if &fo =~ 't'
         set fo-=t
+		echo 'set fo-=t  " Zeile bleibt erhalten'
     else
         set fo+=t
+		echo 'set fo+=t  " Zeilen brechen um'
     endif
 endfunction
 " F10: Highlight too long lines
-"map<F10> :call ToggleTextWrap()<CR>
+map<F10> :call ToggleTextWrap()<CR>
 
 " huzzah32 / micropython development cheats
 "
@@ -355,7 +357,7 @@ function! AdafruitRunFileOnScreen()
 	exe "!" . screensession . " -X stuff 'ampy run " . bufname('%') . "'$(echo -ne '\015')"
 endfunction
 command! Arun call AdafruitRunFileOnScreen()
-map<F10> :call AdafruitRunFileOnScreen()<CR>
+" map<F10> :call AdafruitRunFileOnScreen()<CR>
 
 
 function! AdafruitPutFileOnScreen()
