@@ -207,8 +207,8 @@ nmap ,f <ESC>:call FindCurrentLine()<CR>
 :command! Com :e ..\plan\communication.plan
 
 " global variable, needs to be referenced with prefix g: in function
-:let tempfile = "~/Library/Journal-VIC777C.tmp"
-:let journal = "~/Dropbox/Journal.txt"
+:let tempfile = "~/Library/journal-VIC777C.tmp"
+:let journal = "~/Dropbox/Apps/jejournal/journal.txt"
 
 if has( "win32" )
 	:let g:tempfile = "~/AppData/Local/Temp/Journal-VIC777C.tmp"
@@ -274,6 +274,20 @@ function! Nextv2Todos(  )
 	:syn match Error "\[-\d*\]"
 	:syn match Comment "\[\d*\]"
 endfunction
+
+" Todo Search for pattern
+function! Todo_search( pattern ) 
+	exe 'e ' . g:tempfile
+	1,$d
+	exe 'r ' . g:journal
+	silent v/^@todo/d
+	exe 'silent v/' . a:pattern . '/d'
+	g/^/m0		
+	sort
+	exe 'w! ' . g:tempfile
+	set cursorline
+endfunction
+command! -nargs=1 TS :call Todo_search("<args>")  
 
 function! FindCurrentLine()
 	:let line = getline('.')
