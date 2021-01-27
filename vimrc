@@ -56,7 +56,13 @@ set hidden
 set nohlsearch
 
 "	ignorecase:  ignore the case in search patterns?  NO!
-set noignorecase
+" set noignorecase
+" https://vim.fandom.com/wiki/Searching
+" When 'ignorecase' and 'smartcase' are both on, if a pattern contains an
+" uppercase letter, it is case sensitive, otherwise, it is not. For example,
+" /The would find only "The", while /the would find "the" or "The" etc. 
+set ignorecase
+set smartcase 
 
 "	Color of the search
 "	GUI
@@ -168,7 +174,14 @@ set guifont=Meslo_LG_M_Regular_for_Powerline:h12
 
 " 	Projects notes mit neuer Syntax versehen
 au BufRead,BufNewFile *.log set filetype=plog 
-au BufRead,BufNewFile Journal.txt set filetype=plog 
+au BufRead,BufNewFile journal.txt set filetype=plog fo-=t
+
+" alternative way: https://stackoverflow.com/q/1413285/1933185
+" au BufRead, BufNewFile Journal.txt call JournalOptions()
+" function JournalOptions()
+" 	set filetype = plog
+" 	set fo-=t
+" endfunction
 
 
 " 	jerik 20141014
